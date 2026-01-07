@@ -1,0 +1,4037 @@
+{
+  "config": {
+    "configFile": "/home/yash-shiva/Desktop/Drive/Test_Automation/playwright.config.js",
+    "rootDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "login.spec.ts",
+      "file": "login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "seed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15626,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-01-03T05:55:37.448Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "41d3fd2474a19feb00a1-3cd3a8a4012b80c33fb0",
+          "file": "seed.spec.ts",
+          "line": 35,
+          "column": 5
+        }
+      ],
+      "suites": [
+        {
+          "title": "Login - manual cases to automation",
+          "file": "login.spec.ts",
+          "line": 65,
+          "column": 6,
+          "specs": [
+            {
+              "title": "HB-LOGIN-001: Login with valid credentials",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7737,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:55:53.192Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-edf182660b282f6f8f82",
+              "file": "login.spec.ts",
+              "line": 66,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-002: Login with valid email and wrong password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4716,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:00.951Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-1f5edd49568474962e43",
+              "file": "login.spec.ts",
+              "line": 73,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-003: Login with non-existent user",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5798,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:05.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-315ae31325cbd83643f8",
+              "file": "login.spec.ts",
+              "line": 80,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-004: Required validation on empty email and password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2866,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:11.512Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-47e575f7fefbcf37a992",
+              "file": "login.spec.ts",
+              "line": 87,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-005: Required validation on empty email only",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2815,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:14.397Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-1d0f5a5e06fcb214ef6e",
+              "file": "login.spec.ts",
+              "line": 93,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-006: Required validation on empty password only",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2789,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:17.226Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-387ff2506492cc29902b",
+              "file": "login.spec.ts",
+              "line": 100,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-007: Invalid email format validation (missing @)",
+              "ok": true,
+              "tags": [
+                ")"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2638,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:20.029Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-1d075567f98cb806a50e",
+              "file": "login.spec.ts",
+              "line": 107,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-008: Invalid email format validation (missing domain)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2640,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:22.681Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-2644f3b7064f506568fb",
+              "file": "login.spec.ts",
+              "line": 114,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-009: Email is trimmed of leading/trailing spaces",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7606,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:25.335Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-d403cecd09fa38ab9490",
+              "file": "login.spec.ts",
+              "line": 121,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-010: Email is case-insensitive",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7841,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:32.954Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-083afeaa0305405d8bcd",
+              "file": "login.spec.ts",
+              "line": 128,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-011: Password is case-sensitive",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6615,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:40.809Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-a06cf8dc0d236375ca37",
+              "file": "login.spec.ts",
+              "line": 135,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-012: Password visibility toggle shows and hides password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2991,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:47.441Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-f353cd40a18edd3a1b7b",
+              "file": "login.spec.ts",
+              "line": 142,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-013: Submit with Enter key from password field",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Enter key does not submit the login form.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/login.spec.ts",
+                        "line": 176,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 6760,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:50.449Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Enter key does not submit the login form.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/login.spec.ts",
+                            "line": 176,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-b85503dd81dedefcc764",
+              "file": "login.spec.ts",
+              "line": 166,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-014: Prevent double-submit during loading",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6486,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:56:57.231Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-8e73c1ce61eaf5057653",
+              "file": "login.spec.ts",
+              "line": 180,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-015: Remember-me persists session across reload (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10055,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:03.733Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-13bf2680b8bb049f140b",
+              "file": "login.spec.ts",
+              "line": 195,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-016: Login page redirects when already authenticated",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "App allows visiting /login while authenticated.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/login.spec.ts",
+                        "line": 221,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 19528,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:13.802Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "App allows visiting /login while authenticated.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/login.spec.ts",
+                            "line": 221,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-68c8a274291699a22c54",
+              "file": "login.spec.ts",
+              "line": 213,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-017: Logout clears session and blocks protected pages",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Logout control not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/login.spec.ts",
+                        "line": 232,
+                        "column": 29
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 14419,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:33.348Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Logout control not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/login.spec.ts",
+                            "line": 232,
+                            "column": 29
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-e4650c192f958342dc44",
+              "file": "login.spec.ts",
+              "line": 225,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-018: Forgot password link opens reset flow (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2943,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:47.779Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-50537278d9b7aa27496d",
+              "file": "login.spec.ts",
+              "line": 239,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-019: Network error displays friendly message",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4979,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:50.737Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-c6ba800522a5e5f0e3b2",
+              "file": "login.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-020: Accessibility labels are present for email and password",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2839,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:55.731Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-024c168237bbddffdf17",
+              "file": "login.spec.ts",
+              "line": 267,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-021: Login page is usable on mobile viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2606,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:57:58.583Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-b07d0567ea5379483f29",
+              "file": "login.spec.ts",
+              "line": 288,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-022: Login works in private/incognito mode",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7727,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:01.202Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-0af2159a44e8a8749fdc",
+              "file": "login.spec.ts",
+              "line": 297,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-023: Login retains email after failed attempt",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4960,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:08.941Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-2e4039267753592bb271",
+              "file": "login.spec.ts",
+              "line": 307,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-024: Login form tab order is logical",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2618,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:13.914Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-6ebc9dcb28779b9b5acd",
+              "file": "login.spec.ts",
+              "line": 317,
+              "column": 7
+            },
+            {
+              "title": "HB-LOGIN-025: Login page blocks mixed content",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2510,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:16.548Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-17205980b992a9d79da5",
+              "file": "login.spec.ts",
+              "line": 327,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "signup-account-setup.spec.ts",
+      "file": "signup-account-setup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sign-up Account Setup - manual cases to automation",
+          "file": "signup-account-setup.spec.ts",
+          "line": 146,
+          "column": 6,
+          "specs": [
+            {
+              "title": "HB-SU-SETUP-001: Account setup page loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2727,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:19.093Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-b1baf9904a9cdfb63ced",
+              "file": "signup-account-setup.spec.ts",
+              "line": 147,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-002: Account setup step shows progress indicator (if multi-step)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Progress indicator not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 157,
+                        "column": 24
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2743,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:21.835Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Progress indicator not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 157,
+                            "column": 24
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-2c42fe06b79d49a1052e",
+              "file": "signup-account-setup.spec.ts",
+              "line": 153,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-003: Required field validation shows when all fields empty",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2905,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:24.595Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-87470769d1522426a731",
+              "file": "signup-account-setup.spec.ts",
+              "line": 161,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-004: Business/Company name accepts valid input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 177,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2587,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:27.515Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 177,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-e1ea902136dd7e9e75a5",
+              "file": "signup-account-setup.spec.ts",
+              "line": 173,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-005: Business/Company name trims leading/trailing spaces",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 186,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2809,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:30.117Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 186,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-5c1cce5d4dcd1d1e2682",
+              "file": "signup-account-setup.spec.ts",
+              "line": 182,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-006: Business/Company name max length enforced",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 197,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2717,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:32.940Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 197,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-3b0b944ef35b326e60df",
+              "file": "signup-account-setup.spec.ts",
+              "line": 193,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-007: Business/Company name rejects invalid characters (if restricted)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 207,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2814,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:35.668Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 207,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-5f05d6dbba7a26c6d918",
+              "file": "signup-account-setup.spec.ts",
+              "line": 203,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-008: Industry selection accepts valid option (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Industry dropdown not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 218,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2679,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:38.501Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Industry dropdown not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 218,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-5521e43567152d1b0eb5",
+              "file": "signup-account-setup.spec.ts",
+              "line": 215,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-009: Industry dropdown search works (if searchable)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Industry combobox not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 226,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2579,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:41.195Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Industry combobox not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 226,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-29966b0f2a8a7616a109",
+              "file": "signup-account-setup.spec.ts",
+              "line": 223,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-010: Business type selection (if present) accepts valid option",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business type select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 238,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2672,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:43.790Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business type select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 238,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-40c25ec983d8a594d065",
+              "file": "signup-account-setup.spec.ts",
+              "line": 235,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-011: Country selection defaults correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Country select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 246,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2689,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:46.481Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Country select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 246,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-e6e2b0246a87d9c48f13",
+              "file": "signup-account-setup.spec.ts",
+              "line": 243,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-012: Country selection changes available regions (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Country/Region selects not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 256,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2906,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:49.186Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Country/Region selects not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 256,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-d3134f1fd3153d3a5bfb",
+              "file": "signup-account-setup.spec.ts",
+              "line": 251,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-013: State/Region required validation (if required)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "State/Region select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 272,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2933,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:52.109Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "State/Region select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 272,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-606b7c8f1f0f1c13c139",
+              "file": "signup-account-setup.spec.ts",
+              "line": 269,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-014: City input accepts valid value (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "City field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 283,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2967,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:55.063Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "City field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 283,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-89903b10d12c96b6d6ae",
+              "file": "signup-account-setup.spec.ts",
+              "line": 280,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-015: Address line accepts valid input (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2867,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:58:58.043Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-739343021b5ca3a4bf43",
+              "file": "signup-account-setup.spec.ts",
+              "line": 288,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-016: Postal/ZIP code validation accepts correct format (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Postal code field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 299,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2965,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:00.926Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Postal code field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 299,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-37a83d54ff9064c62833",
+              "file": "signup-account-setup.spec.ts",
+              "line": 296,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-017: Postal/ZIP code rejects invalid format (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Postal code field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 307,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2916,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:03.913Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Postal code field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 307,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-8c30aaf5eb9d4d44d7c0",
+              "file": "signup-account-setup.spec.ts",
+              "line": 304,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-018: Currency selection defaults correctly (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Currency select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 318,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2840,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:06.849Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Currency select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 318,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-7d1062f0456f41a4e0d0",
+              "file": "signup-account-setup.spec.ts",
+              "line": 315,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-019: Currency selection changes accepted formats (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Currency select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 326,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2812,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:09.709Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Currency select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 326,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-85372910a550d6028fb6",
+              "file": "signup-account-setup.spec.ts",
+              "line": 323,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-020: Timezone selection defaults correctly (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Timezone select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 334,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 17393,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:12.540Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Timezone select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 334,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-210a85c31eeeb607eaf0",
+              "file": "signup-account-setup.spec.ts",
+              "line": 331,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-021: Timezone selection accepts valid option (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Timezone select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 342,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2881,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:29.951Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Timezone select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 342,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-c487b256ebd001ac4827",
+              "file": "signup-account-setup.spec.ts",
+              "line": 339,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-022: Fiscal year start date accepts valid value (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Fiscal year input not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 350,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2789,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:32.848Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Fiscal year input not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 350,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-003e00ec5d534fa8ed21",
+              "file": "signup-account-setup.spec.ts",
+              "line": 347,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-023: Fiscal year start date validation blocks invalid value (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Fiscal year input not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 358,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2868,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:35.654Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Fiscal year input not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 358,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-ac07bc744e04ecc633b3",
+              "file": "signup-account-setup.spec.ts",
+              "line": 355,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-024: Accounting method defaults correctly (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Accounting method select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 369,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2901,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:38.538Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Accounting method select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 369,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-abde34af05c7452c6684",
+              "file": "signup-account-setup.spec.ts",
+              "line": 366,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-025: Accounting method selection saved (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Accounting method select not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 377,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2765,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:41.456Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Accounting method select not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 377,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-f0a9446577f2ffeda735",
+              "file": "signup-account-setup.spec.ts",
+              "line": 374,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-026: Tax registration toggle works (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Tax toggle not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 385,
+                        "column": 73
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2775,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:44.234Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Tax toggle not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 385,
+                            "column": 73
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-e57f0c28c442041a0f2b",
+              "file": "signup-account-setup.spec.ts",
+              "line": 382,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-027: Tax ID/GST number validation accepts valid input (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Tax ID field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 397,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2987,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:47.025Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Tax ID field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 397,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-c45355ce4b58f8e83a33",
+              "file": "signup-account-setup.spec.ts",
+              "line": 394,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-028: Tax ID/GST number rejects invalid input (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Tax ID field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 405,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2967,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:50.035Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Tax ID field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 405,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-bf324ab7e99435fc6c6c",
+              "file": "signup-account-setup.spec.ts",
+              "line": 402,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-029: Phone number accepts valid value (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Phone field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 416,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2856,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:53.022Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Phone field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 416,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-3e28aa0468c34957d527",
+              "file": "signup-account-setup.spec.ts",
+              "line": 413,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-030: Phone number rejects letters (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Phone field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 424,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2742,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:55.892Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Phone field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 424,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-e667f0b8888032e3d234",
+              "file": "signup-account-setup.spec.ts",
+              "line": 421,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-031: Website URL accepts valid format (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Website field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 435,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2713,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T05:59:58.647Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Website field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 435,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-de8f0d918a6992b913a0",
+              "file": "signup-account-setup.spec.ts",
+              "line": 432,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-032: Website URL rejects invalid format (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Website field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 443,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2829,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:01.374Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Website field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 443,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-c63fca1ebea412e8fe45",
+              "file": "signup-account-setup.spec.ts",
+              "line": 440,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-033: Logo upload accepts supported file type (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Logo upload not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 454,
+                        "column": 65
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2613,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:04.217Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Logo upload not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 454,
+                            "column": 65
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-c562a49b8337a124f949",
+              "file": "signup-account-setup.spec.ts",
+              "line": 451,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-034: Logo upload rejects unsupported file type (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Logo upload not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 463,
+                        "column": 65
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2850,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:06.845Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Logo upload not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 463,
+                            "column": 65
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-59e15569963fed7130f0",
+              "file": "signup-account-setup.spec.ts",
+              "line": 460,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-035: Logo upload rejects large file size (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Logo upload not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 474,
+                        "column": 65
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2840,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:09.710Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Logo upload not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 474,
+                            "column": 65
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-496b1196004c40f2650f",
+              "file": "signup-account-setup.spec.ts",
+              "line": 471,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-036: Continue button enabled only when required fields complete",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2927,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:12.566Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-3f4ee4a605f98f3c107a",
+              "file": "signup-account-setup.spec.ts",
+              "line": 482,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-037: Form submission succeeds with valid required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Submit disabled until required fields are filled.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 493,
+                        "column": 24
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 3095,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:15.513Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Submit disabled until required fields are filled.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 493,
+                            "column": 24
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-6b29c485b9ba374c60e3",
+              "file": "signup-account-setup.spec.ts",
+              "line": 488,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-038: Back button returns to previous step (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Back button not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 507,
+                        "column": 21
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2937,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:18.641Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Back button not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 507,
+                            "column": 21
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-750fd9749396ae68d647",
+              "file": "signup-account-setup.spec.ts",
+              "line": 500,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-039: Form retains values when navigating back and forth",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 516,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2746,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:21.612Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 516,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-445238df63dbbd2deb25",
+              "file": "signup-account-setup.spec.ts",
+              "line": 512,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-040: Cancel exits sign-up flow (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Cancel control not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 537,
+                        "column": 23
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2989,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:24.372Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Cancel control not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 537,
+                            "column": 23
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-d0dcc71d8bb4a654cd90",
+              "file": "signup-account-setup.spec.ts",
+              "line": 530,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-041: Inline error messages appear near fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Inline errors not shown when submit is disabled.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 550,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2845,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:27.390Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Inline errors not shown when submit is disabled.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 550,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-c914c62c25209e17f543",
+              "file": "signup-account-setup.spec.ts",
+              "line": 542,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-042: Error messages clear after correcting input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 558,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2775,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:30.251Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 558,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-9cd001a40d9c7af43e13",
+              "file": "signup-account-setup.spec.ts",
+              "line": 554,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-043: Keyboard-only navigation works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2579,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:33.038Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-a2eee92977ce34a7ce76",
+              "file": "signup-account-setup.spec.ts",
+              "line": 567,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-044: Screen reader labels exist for all inputs",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3327,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:35.629Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-3869014a9b1849499660",
+              "file": "signup-account-setup.spec.ts",
+              "line": 574,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-045: Form is usable at 200% browser zoom",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2884,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:38.969Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-22aaf9290c64b78afc30",
+              "file": "signup-account-setup.spec.ts",
+              "line": 588,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-046: Mobile viewport layout renders correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2781,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:41.868Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-60dc2c4474f89d64695d",
+              "file": "signup-account-setup.spec.ts",
+              "line": 596,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-047: Tablet viewport layout renders correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2638,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:44.661Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-7b9f8d3198f647461285",
+              "file": "signup-account-setup.spec.ts",
+              "line": 603,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-048: Cross-browser layout parity",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2757,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:47.313Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-baa45752cb2488c423de",
+              "file": "signup-account-setup.spec.ts",
+              "line": 610,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-049: Form handles slow network gracefully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2813,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:50.084Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-500384bf4c8cfdc509c5",
+              "file": "signup-account-setup.spec.ts",
+              "line": 616,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-050: API error shows friendly message",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Submit disabled until required fields are filled.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 641,
+                        "column": 24
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2831,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:52.910Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Submit disabled until required fields are filled.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 641,
+                            "column": 24
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-4c04d73c28afcc80291c",
+              "file": "signup-account-setup.spec.ts",
+              "line": 630,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-051: Duplicate business name handled gracefully (if validated)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 652,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2622,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:55.755Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 652,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-8627cba246cdd92d58d3",
+              "file": "signup-account-setup.spec.ts",
+              "line": 648,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-052: Duplicate tax ID handled gracefully (if validated)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Tax ID field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 664,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2960,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:00:58.396Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Tax ID field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 664,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-1de0d95aa36615f8a17c",
+              "file": "signup-account-setup.spec.ts",
+              "line": 661,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-053: Form retains values after API error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 677,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2725,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:01.383Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 677,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-044f12cd606aae4c9b99",
+              "file": "signup-account-setup.spec.ts",
+              "line": 673,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-054: Prevent double-submit on submit button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Submit disabled until required fields are filled.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 696,
+                        "column": 24
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2611,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:04.120Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Submit disabled until required fields are filled.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 696,
+                            "column": 24
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-d721d9d388c7f6a3d1e1",
+              "file": "signup-account-setup.spec.ts",
+              "line": 691,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-055: Enter key submits form when focused (if supported)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 706,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2646,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:06.745Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 706,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-d26848bced3498672ccd",
+              "file": "signup-account-setup.spec.ts",
+              "line": 702,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-056: Tooltips/help icons display guidance (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Help icon not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 721,
+                        "column": 21
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2833,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:09.403Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Help icon not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 721,
+                            "column": 21
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-e2f429f927ec00fdf1a4",
+              "file": "signup-account-setup.spec.ts",
+              "line": 715,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-057: Required fields are clearly marked",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2612,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:12.248Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-d92183bea8adcc4504f7",
+              "file": "signup-account-setup.spec.ts",
+              "line": 725,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-058: Input placeholders do not overlap labels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2992,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:14.875Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-618523c87e9cc4edd458",
+              "file": "signup-account-setup.spec.ts",
+              "line": 732,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-059: Privacy policy/terms links open correctly (if present)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2801,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:17.880Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-20cb8cfa707198fa365c",
+              "file": "signup-account-setup.spec.ts",
+              "line": 739,
+              "column": 7
+            },
+            {
+              "title": "HB-SU-SETUP-060: Data is saved after refresh (if autosave expected)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Business name field not found.",
+                      "location": {
+                        "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                        "line": 754,
+                        "column": 71
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 2623,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-03T06:01:20.694Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Business name field not found.",
+                          "location": {
+                            "file": "/home/yash-shiva/Desktop/Drive/Test_Automation/tests/signup-account-setup.spec.ts",
+                            "line": 754,
+                            "column": 71
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "a19afb802020a41ed7f2-7615ace8b03e57014f12",
+              "file": "signup-account-setup.spec.ts",
+              "line": 750,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-01-03T05:55:36.568Z",
+    "duration": 346819.029,
+    "expected": 37,
+    "skipped": 49,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

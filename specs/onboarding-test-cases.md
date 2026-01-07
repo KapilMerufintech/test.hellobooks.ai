@@ -1,0 +1,219 @@
+# Onboarding Test Cases (Login / Sign-up / Sign-in)
+
+This list is intended for Playwright automation coverage of onboarding flows.
+It assumes login uses `tests/seed.spec.ts` for initialization and credentials.
+
+## Login (email + password)
+- Valid credentials -> lands on expected post-login page
+- Login page loads with correct title/logo/primary CTA
+- Login page uses HTTPS and no mixed content warnings
+- Valid credentials with leading/trailing spaces in email -> trims and succeeds
+- Valid credentials with leading/trailing spaces in password -> trims or rejects consistently
+- Email case-insensitivity (UPPER/lower mix) -> succeeds
+- Password case sensitivity -> fails with error for wrong case
+- Invalid email format (missing @) -> client validation message
+- Invalid email format (missing domain) -> client validation message
+- Invalid email format (invalid TLD) -> client validation message
+- Invalid email format (double @@) -> validation message
+- Invalid email format (spaces) -> validation message
+- Empty email -> required field validation
+- Empty password -> required field validation
+- Both empty -> both validations shown
+- Short password (below min length) -> validation message
+- Very long email (max length) -> handled with validation or truncation
+- Very long password (max length) -> handled with validation or truncation
+- Email with subdomain -> accepted
+- Email with plus alias -> accepted
+- Email with periods in local part -> accepted
+- Email with uppercase domain -> accepted
+- Email with internationalized domain (if supported) -> accepted or validation message
+- Email with consecutive dots -> rejected or sanitized
+- Email with trailing dot -> rejected
+- Non-existent user -> generic error message
+- Wrong password for valid user -> generic error message
+- Deactivated user -> blocked with clear messaging
+- Locked user -> blocked with clear messaging
+- Multiple failed attempts -> rate limit or lockout behavior
+- Rate limit cooldown expires -> login allowed
+- Captcha shown after failures (if enabled) -> must solve to proceed
+- Submit button disabled until fields valid (if expected)
+- Loading state shown on submit
+- Double submit prevented while loading
+- Network error on submit -> error toast and retry possible
+- 500 server error -> friendly error and retry possible
+- 401/403 handled gracefully -> visible error state
+- 429 rate limit -> clear message and retry after cooldown
+- 422 validation error from API -> shown inline
+- Validation errors clear once fields corrected
+- Password visibility toggle shows/hides password
+- Copy/paste in password field handled per policy
+- Enter key submits from password field
+- Tab order correct and focus visible
+- Autofill with password manager works
+- Remember-me checked -> session persists across reload
+- Remember-me unchecked -> session ends on browser close
+- Logout clears session -> cannot access protected page
+- Back button after login does not show login page
+- Refresh on login page after auth redirects to app
+- Direct visit to /login when authenticated redirects to app
+- Redirect to originally requested protected page after login
+- Cookie flags set (Secure/HttpOnly/SameSite)
+- No sensitive data in URL after login
+- Error message is generic (no user enumeration)
+- Locale strings correct (if i18n)
+- Accessibility labels on email/password fields
+- ARIA error messages announced for screen readers
+- Mobile viewport layout ok (no clipped inputs)
+- Tablet viewport layout ok
+- Cross-browser parity (Chromium/WebKit/Firefox)
+- Form resets correctly after logout
+- Session survives page reload on authenticated pages
+- Session invalid after logout in another tab (if expected)
+- Login in one tab reflects state in another
+- Open login in new tab after logout -> stays logged out
+- OAuth/SSO buttons hidden when disabled
+- SSO buttons visible and clickable when enabled
+- Password manager suggestion list does not cover submit button
+- Browser back from password reset returns to login
+- Login page keyboard-only usable (no mouse)
+- Login page works in private/incognito mode
+- Login API slow response shows spinner (no UI freeze)
+
+## Sign-up (registration)
+- New user with valid data -> account created
+- Sign-up page loads with correct title/logo/primary CTA
+- Sign-up page uses HTTPS and no mixed content warnings
+- Required fields missing -> inline validation
+- Email already exists -> error, no enumeration details
+- Invalid email format -> validation
+- Password length below min -> validation
+- Password without required character classes -> validation
+- Password with spaces (if disallowed) -> validation
+- Password meets policy -> accepted
+- Confirm password mismatch -> validation
+- Terms and conditions unchecked -> cannot submit
+- Optional fields empty -> allowed
+- Name field accepts hyphen/apostrophe
+- Name field rejects disallowed characters (emoji/script)
+- Name field trims leading/trailing spaces
+- Name field max length enforced
+- Phone number format validation (if required)
+- Phone number with country code accepted (if required)
+- Phone number with letters rejected
+- Country/state selection required (if present)
+- Referral/promo code valid -> accepted
+- Referral/promo code invalid -> error message
+- Referral/promo code optional -> sign-up succeeds without it
+- Sign-up submit loading state -> prevents double submit
+- Network error on submit -> error and retry possible
+- 500 server error -> friendly error and retry possible
+- 409 conflict (email exists) -> friendly error
+- Successful sign-up auto-login (if expected)
+- Successful sign-up redirects to onboarding/welcome
+- Verification email sent (if required)
+- Email verification link activates account
+- Expired verification link -> error and resend
+- Resend verification email rate-limited
+- Verification link used twice -> handled gracefully
+- Sign-up cancel -> returns to login or home
+- Privacy policy and terms links open correctly
+- Email field case handling consistent
+- Long field inputs capped or validated
+- Keyboard navigation and focus order correct
+- Accessibility labels for all fields
+- Mobile viewport layout ok
+- Tablet viewport layout ok
+- Cross-browser parity
+- Sign-up form does not expose password in DOM attributes
+- Password strength meter updates as user types (if present)
+- Password strength meter hidden when field cleared (if present)
+- Show/hide password toggles work on both password fields
+- Paste into confirm password handled correctly
+- Error messages clear once fields corrected
+- Form retains non-password values after failed submit
+- Marketing opt-in default state correct (if present)
+- CAPTCHA required for new account (if enabled)
+- CAPTCHA failure -> clear error
+- Multi-step sign-up preserves data between steps (if present)
+- Back/Next buttons in multi-step flow work (if present)
+- Progress indicator reflects current step (if present)
+- Email domain blocklist enforced (if configured)
+- Disposable email blocked (if configured)
+- Password reuse policy enforced (if configured)
+- MFA enrollment prompt shown after sign-up (if expected)
+- MFA enrollment skip works and later reminder shown (if expected)
+
+## Sign-in alternatives (OTP / magic link / SSO)
+- OTP sign-in flow available (if enabled)
+- OTP sent to correct channel (email/SMS)
+- Invalid OTP -> error and retry
+- Expired OTP -> error and request new
+- OTP throttling after multiple attempts
+- OTP resend available after cooldown
+- OTP auto-submit on full entry (if expected)
+- OTP input supports paste of full code
+- OTP input rejects non-numeric characters
+- OTP length validation (short/long)
+- Magic link requested -> email sent
+- Magic link opens and logs in
+- Expired magic link -> error and resend
+- Magic link used twice -> handled gracefully
+- SSO provider login succeeds
+- SSO provider cancel -> returns to login with error
+- SSO failure -> handled with message
+- SSO new user -> correct onboarding path
+- SSO existing user -> logs into existing account
+- Switch between password and OTP flows works
+- Switch between OTP and magic link works
+- Multiple OTP requests invalidates previous code
+- Magic link opens on a different device and logs in
+- Magic link opens in private mode and logs in
+- SSO login honors redirect to originally requested page
+- SSO with disabled user -> blocked with clear message
+- SSO missing required claims -> friendly error
+- SSO multi-account chooser works (if provider supports)
+- SSO popup blocked -> fallback instructions shown
+
+## Session and security
+- Session timeout after inactivity (if configured)
+- Refresh token renewal works (if configured)
+- Multiple device sign-in policy enforced (if any)
+- Concurrent session invalidation works (if any)
+- Logout from one device invalidates others (if expected)
+- CSRF protections on auth endpoints (if applicable)
+- No sensitive fields stored in localStorage (if policy)
+- XSS-safe rendering of error messages
+- Auth cookies scoped to correct domain/path
+- Remember-me cookie persists with correct max-age
+- Session cookie cleared on logout
+- Idle timeout warning displayed before logout (if expected)
+- Device/session list shows latest login (if applicable)
+- Password change invalidates other sessions (if expected)
+- Brute-force protection message does not leak details
+
+## UX and resiliency
+- Inline errors appear near fields
+- Global error toast appears on server errors
+- Error messages dismissable or auto-clear
+- Form retains email value on failed login
+- Form clears password on failed login (if policy)
+- Links to reset password are visible
+- Reset password flow entry works (if present)
+- Reset password: invalid email -> generic response
+- Reset password: valid email -> success response
+- Reset password: link expired -> error and resend
+- Reset password: password policy enforced
+- Reset password: reuse old password rejected (if policy)
+- Reset password: passwords mismatch validation
+- Reset password: show/hide password works
+- Reset password: confirm password required
+- Reset password: redirect to login after success
+- Reset password: auto-login after success (if expected)
+- Reset password: rate limit resend
+- Reset password: email link opens correct environment
+- Reset password: link used twice -> handled gracefully
+- Reset password: network error -> retry possible
+- UI strings are consistent across login/sign-up/reset
+- Input placeholders and labels do not overlap
+- Error states are accessible (aria-live, focus to error)
+- Forms usable with browser zoom 200%

@@ -87,51 +87,51 @@ async function optionalAction(locator: Locator, action: () => Promise<void>, not
   test.info().annotations.push({ type: 'note', description: note });
 }
 
-test.describe('Overview - logged out', () => {
-  test('HB-OVERVIEW-001: Load Overview page after login', { tag: ['@overview', '@HB-OVERVIEW-001'] }, async ({ page }) => {
+test.describe('@overview Overview - logged out @SDE619360', () => {
+  test('HB-OVERVIEW-001: Load Overview page after login @TECFE9B74', { tag: ['@overview', '@HB-OVERVIEW-001'] }, async ({ page }) => {
     await seedLogin(page);
     await openOverview(page);
     await expect(page).toHaveURL(/\/$/);
   });
 
-  test('HB-OVERVIEW-002: Overview is default landing page after login', { tag: ['@overview', '@HB-OVERVIEW-002'] }, async ({ page }) => {
+  test('HB-OVERVIEW-002: Overview is default landing page after login @T6A756370', { tag: ['@overview', '@HB-OVERVIEW-002'] }, async ({ page }) => {
     await seedLogin(page);
     await expect(page).toHaveURL(/\/$/);
   });
 
-  test('HB-OVERVIEW-003: Overview page blocks access when not authenticated', { tag: ['@overview', '@HB-OVERVIEW-003'] }, async ({ page }) => {
+  test('HB-OVERVIEW-003: Overview page blocks access when not authenticated @T4D90B3FA', { tag: ['@overview', '@HB-OVERVIEW-003'] }, async ({ page }) => {
     await page.goto(`${baseUrl}/`);
     await page.waitForLoadState('domcontentloaded');
     await expect(page).toHaveURL(getLoginRedirectRegex());
   });
 });
 
-test.describe('Overview - logged in', () => {
+test.describe('@overview Overview - logged in @SB59746FD', () => {
   test.beforeEach(async ({ page }) => {
     await seedLogin(page);
     await openOverview(page);
   });
 
-  test('HB-OVERVIEW-004: Greeting displays user name', { tag: ['@overview', '@HB-OVERVIEW-004'] }, async ({ page }) => {
+  test('HB-OVERVIEW-004: Greeting displays user name @T51E2AE8E', { tag: ['@overview', '@HB-OVERVIEW-004'] }, async ({ page }) => {
     const greeting = page.getByRole('heading', { name: /hi[,!]?|welcome back/i }).first();
     await expect(greeting).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-005: Financial Overview heading is visible', { tag: ['@overview', '@HB-OVERVIEW-005'] }, async ({ page }) => {
+  test('HB-OVERVIEW-005: Financial Overview heading is visible @T17D8C46C', { tag: ['@overview', '@HB-OVERVIEW-005'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Financial Overview')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-006: KPI cards show Total Revenue and Total Expenses', { tag: ['@overview', '@HB-OVERVIEW-006'] }, async ({ page }) => {
+  test('HB-OVERVIEW-006: KPI cards show Total Revenue and Total Expenses @TA245F164', { tag: ['@overview', '@HB-OVERVIEW-006'] }, async ({ page }) => {
     await expect(page.getByText(/total revenue|total income/i).first()).toBeVisible({ timeout: 15000 });
     await expect(getByTextAny(page, 'Total Expenses')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-007: KPI cards show Net Profit and Expense/Sales Ratio', { tag: ['@overview', '@HB-OVERVIEW-007'] }, async ({ page }) => {
+  test('HB-OVERVIEW-007: KPI cards show Net Profit and Expense/Sales Ratio @TBE17706E', { tag: ['@overview', '@HB-OVERVIEW-007'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Net Profit')).toBeVisible({ timeout: 15000 });
     await expect(getByTextAny(page, 'Expense/Sales Ratio')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-008: KPI values show currency formatting', { tag: ['@overview', '@HB-OVERVIEW-008'] }, async ({ page }) => {
+  test('HB-OVERVIEW-008: KPI values show currency formatting @T197853DE', { tag: ['@overview', '@HB-OVERVIEW-008'] }, async ({ page }) => {
     const labels = ['Total Income', 'Total Revenue', 'Total Expenses', 'Net Profit', 'Cash Balance'];
     let parsed = false;
     for (const label of labels) {
@@ -144,59 +144,59 @@ test.describe('Overview - logged in', () => {
     expect(parsed).toBeTruthy();
   });
 
-  test('HB-OVERVIEW-009: Reminders widget renders', { tag: ['@overview', '@HB-OVERVIEW-009'] }, async ({ page }) => {
+  test('HB-OVERVIEW-009: Reminders widget renders @T0C75C44E', { tag: ['@overview', '@HB-OVERVIEW-009'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Reminders')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-010: Match Status widget renders', { tag: ['@overview', '@HB-OVERVIEW-010'] }, async ({ page }) => {
+  test('HB-OVERVIEW-010: Match Status widget renders @T8E821840', { tag: ['@overview', '@HB-OVERVIEW-010'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Match Status')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-011: Match Type Distribution widget renders', { tag: ['@overview', '@HB-OVERVIEW-011'] }, async ({ page }) => {
+  test('HB-OVERVIEW-011: Match Type Distribution widget renders @T8845EE0A', { tag: ['@overview', '@HB-OVERVIEW-011'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Match Type Distribution')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-012: Recent Matches widget renders', { tag: ['@overview', '@HB-OVERVIEW-012'] }, async ({ page }) => {
+  test('HB-OVERVIEW-012: Recent Matches widget renders @T9D046971', { tag: ['@overview', '@HB-OVERVIEW-012'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Recent Matches')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-013: Industry Benchmarks widget renders', { tag: ['@overview', '@HB-OVERVIEW-013'] }, async ({ page }) => {
+  test('HB-OVERVIEW-013: Industry Benchmarks widget renders @T4C495F3B', { tag: ['@overview', '@HB-OVERVIEW-013'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Industry Benchmarks')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-014: Expense Breakdown by Category chart renders', { tag: ['@overview', '@HB-OVERVIEW-014'] }, async ({ page }) => {
+  test('HB-OVERVIEW-014: Expense Breakdown by Category chart renders @T4C7E8A42', { tag: ['@overview', '@HB-OVERVIEW-014'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Expense Breakdown by Category')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-015: Budget Tracker widget renders', { tag: ['@overview', '@HB-OVERVIEW-015'] }, async ({ page }) => {
+  test('HB-OVERVIEW-015: Budget Tracker widget renders @TA6DFCD60', { tag: ['@overview', '@HB-OVERVIEW-015'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Budget Tracker')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-016: AI Spending Insights widget renders', { tag: ['@overview', '@HB-OVERVIEW-016'] }, async ({ page }) => {
+  test('HB-OVERVIEW-016: AI Spending Insights widget renders @T274C2BFA', { tag: ['@overview', '@HB-OVERVIEW-016'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'AI Spending Insights')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-017: Predictive Cash Flow widget renders', { tag: ['@overview', '@HB-OVERVIEW-017'] }, async ({ page }) => {
+  test('HB-OVERVIEW-017: Predictive Cash Flow widget renders @T14584B27', { tag: ['@overview', '@HB-OVERVIEW-017'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Predictive Cash Flow')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-018: Anomaly Detection widget renders', { tag: ['@overview', '@HB-OVERVIEW-018'] }, async ({ page }) => {
+  test('HB-OVERVIEW-018: Anomaly Detection widget renders @T77925A51', { tag: ['@overview', '@HB-OVERVIEW-018'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Anomaly Detection')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-019: Expense Forecast widget renders', { tag: ['@overview', '@HB-OVERVIEW-019'] }, async ({ page }) => {
+  test('HB-OVERVIEW-019: Expense Forecast widget renders @T8B48A2CF', { tag: ['@overview', '@HB-OVERVIEW-019'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Expense Forecast')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-020: Top Vendors by Spend widget renders', { tag: ['@overview', '@HB-OVERVIEW-020'] }, async ({ page }) => {
+  test('HB-OVERVIEW-020: Top Vendors by Spend widget renders @T77856F26', { tag: ['@overview', '@HB-OVERVIEW-020'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Top Vendors by Spend')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-021: Expense Heatmap widget renders', { tag: ['@overview', '@HB-OVERVIEW-021'] }, async ({ page }) => {
+  test('HB-OVERVIEW-021: Expense Heatmap widget renders @TF7FA2D99', { tag: ['@overview', '@HB-OVERVIEW-021'] }, async ({ page }) => {
     await expect(getByTextAny(page, 'Expense Heatmap')).toBeVisible({ timeout: 15000 });
   });
 
-  test('HB-OVERVIEW-022: Overview navigation highlights active state', { tag: ['@overview', '@HB-OVERVIEW-022'] }, async ({ page }) => {
+  test('HB-OVERVIEW-022: Overview navigation highlights active state @TEE87517B', { tag: ['@overview', '@HB-OVERVIEW-022'] }, async ({ page }) => {
     const overviewLink = page.getByRole('link', { name: /overview/i }).first();
     await expect(overviewLink).toBeVisible();
     const ariaCurrent = await overviewLink.getAttribute('aria-current');
@@ -205,13 +205,13 @@ test.describe('Overview - logged in', () => {
     }
   });
 
-  test('HB-OVERVIEW-023: Overview page supports refresh without logout', { tag: ['@overview', '@HB-OVERVIEW-023'] }, async ({ page }) => {
+  test('HB-OVERVIEW-023: Overview page supports refresh without logout @T5613239F', { tag: ['@overview', '@HB-OVERVIEW-023'] }, async ({ page }) => {
     await page.reload();
     await page.waitForLoadState('domcontentloaded');
     await expect(page).toHaveURL(/\/$/);
   });
 
-  test('HB-OVERVIEW-024: Overview load time under 10 seconds', { tag: ['@overview', '@HB-OVERVIEW-024'] }, async ({ page }) => {
+  test('HB-OVERVIEW-024: Overview load time under 10 seconds @T5A6B8BC6', { tag: ['@overview', '@HB-OVERVIEW-024'] }, async ({ page }) => {
     const start = Date.now();
     await page.goto(`${baseUrl}/`);
     await expect(getByTextAny(page, 'Financial Overview')).toBeVisible({ timeout: 15000 });
@@ -219,7 +219,7 @@ test.describe('Overview - logged in', () => {
     expect(elapsedMs).toBeLessThan(10000);
   });
 
-  test('HB-OVERVIEW-025: Overview page has no console errors on load', { tag: ['@overview', '@HB-OVERVIEW-025'] }, async ({ page }) => {
+  test('HB-OVERVIEW-025: Overview page has no console errors on load @TF2DA5D29', { tag: ['@overview', '@HB-OVERVIEW-025'] }, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (err) => errors.push(err.message));
     page.on('console', (msg) => {
@@ -230,7 +230,7 @@ test.describe('Overview - logged in', () => {
     expect(errors.length).toBe(0);
   });
 
-  test('HB-OVERVIEW-026: Overview page blocks mixed content', { tag: ['@overview', '@HB-OVERVIEW-026'] }, async ({ page }) => {
+  test('HB-OVERVIEW-026: Overview page blocks mixed content @T4A7E3BAC', { tag: ['@overview', '@HB-OVERVIEW-026'] }, async ({ page }) => {
     const warnings: string[] = [];
     page.on('console', (msg) => {
       if (msg.type() === 'warning' || msg.type() === 'error') warnings.push(msg.text());
@@ -241,7 +241,7 @@ test.describe('Overview - logged in', () => {
     expect(mixed).toBeUndefined();
   });
 
-  test('HB-OVERVIEW-027: Overview page works on mobile viewport', { tag: ['@overview', '@HB-OVERVIEW-027'] }, async ({ page }) => {
+  test('HB-OVERVIEW-027: Overview page works on mobile viewport @T870DE67C', { tag: ['@overview', '@HB-OVERVIEW-027'] }, async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(`${baseUrl}/`);
     await expect(getByHeading(page, 'Financial Overview')).toBeVisible();
@@ -249,31 +249,31 @@ test.describe('Overview - logged in', () => {
     expect(bodyWidth).toBeLessThanOrEqual(375);
   });
 
-  test('HB-OVERVIEW-028: Overview widgets are keyboard accessible', { tag: ['@overview', '@HB-OVERVIEW-028'] }, async ({ page }) => {
+  test('HB-OVERVIEW-028: Overview widgets are keyboard accessible @TDD67D2FF', { tag: ['@overview', '@HB-OVERVIEW-028'] }, async ({ page }) => {
     await page.keyboard.press('Tab');
     const activeTag = await page.evaluate(() => document.activeElement?.tagName || '');
     expect(activeTag).not.toBe('');
   });
 
-  test('HB-OVERVIEW-029: Overview page shows consistent branding', { tag: ['@overview', '@HB-OVERVIEW-029'] }, async ({ page }) => {
+  test('HB-OVERVIEW-029: Overview page shows consistent branding @T29F56599', { tag: ['@overview', '@HB-OVERVIEW-029'] }, async ({ page }) => {
     await expect(page.getByText(/hello?books/i).first()).toBeVisible();
   });
 
-  test('HB-OVERVIEW-030: Overview page allows opening Settings from header', { tag: ['@overview', '@HB-OVERVIEW-030'] }, async ({ page }) => {
+  test('HB-OVERVIEW-030: Overview page allows opening Settings from header @TAF5B001B', { tag: ['@overview', '@HB-OVERVIEW-030'] }, async ({ page }) => {
     const settingsLink = page.getByRole('link', { name: /settings/i }).first();
     await optionalAction(settingsLink, async () => {
       await clickAndAssertNavigation(page, settingsLink, /settings/i);
     }, 'Settings link not present.');
   });
 
-  test('HB-OVERVIEW-031: Overview page allows opening Help from header', { tag: ['@overview', '@HB-OVERVIEW-031'] }, async ({ page }) => {
+  test('HB-OVERVIEW-031: Overview page allows opening Help from header @T3E96EFA1', { tag: ['@overview', '@HB-OVERVIEW-031'] }, async ({ page }) => {
     const helpLink = page.getByRole('link', { name: /help/i }).first();
     await optionalAction(helpLink, async () => {
       await clickAndAssertNavigation(page, helpLink, /help/i);
     }, 'Help link not present.');
   });
 
-  test('HB-OVERVIEW-032: Overview page allows opening Profile menu', { tag: ['@overview', '@HB-OVERVIEW-032'] }, async ({ page }) => {
+  test('HB-OVERVIEW-032: Overview page allows opening Profile menu @T934834C6', { tag: ['@overview', '@HB-OVERVIEW-032'] }, async ({ page }) => {
     const profileTrigger = page.getByText(/@/).first();
     await optionalAction(profileTrigger, async () => {
       await profileTrigger.click();
@@ -281,7 +281,7 @@ test.describe('Overview - logged in', () => {
     }, 'Profile trigger not detected.');
   });
 
-  test('HB-OVERVIEW-033: Overview page logout from profile menu', { tag: ['@overview', '@HB-OVERVIEW-033'] }, async ({ page }) => {
+  test('HB-OVERVIEW-033: Overview page logout from profile menu @TA942B14D', { tag: ['@overview', '@HB-OVERVIEW-033'] }, async ({ page }) => {
     const profileTrigger = page.getByText(/@/).first();
     await optionalAction(profileTrigger, async () => {
       await profileTrigger.click();
@@ -292,7 +292,7 @@ test.describe('Overview - logged in', () => {
     }, 'Profile or logout not available.');
   });
 
-  test('HB-OVERVIEW-034: Overview page retains state after navigation back', { tag: ['@overview', '@HB-OVERVIEW-034'] }, async ({ page }) => {
+  test('HB-OVERVIEW-034: Overview page retains state after navigation back @T1D018636', { tag: ['@overview', '@HB-OVERVIEW-034'] }, async ({ page }) => {
     const transactionsLink = page.getByRole('link', { name: /transactions/i }).first();
     await optionalAction(transactionsLink, async () => {
       await transactionsLink.click();
@@ -302,12 +302,12 @@ test.describe('Overview - logged in', () => {
     }, 'Transactions link not present.');
   });
 
-  test('HB-OVERVIEW-035: Overview page redirect from /login when authenticated', { tag: ['@overview', '@HB-OVERVIEW-035'] }, async ({ page }) => {
+  test('HB-OVERVIEW-035: Overview page redirect from /login when authenticated @TEDF25497', { tag: ['@overview', '@HB-OVERVIEW-035'] }, async ({ page }) => {
     await page.goto(`${baseUrl}/login`);
     await expect(page).not.toHaveURL(getLoginRedirectRegex());
   });
 
-  test('HB-OVERVIEW-039: AI insights prompt input accepts query', { tag: ['@overview', '@HB-OVERVIEW-039'] }, async ({ page }) => {
+  test('HB-OVERVIEW-039: AI insights prompt input accepts query @T9DC36910', { tag: ['@overview', '@HB-OVERVIEW-039'] }, async ({ page }) => {
     const promptInput = page.locator(
       'input[placeholder*="Ask me anything" i], textarea[placeholder*="Ask me anything" i]',
     ).first();
@@ -317,7 +317,7 @@ test.describe('Overview - logged in', () => {
     }, 'AI prompt input not present.');
   });
 
-  test('HB-OVERVIEW-040: AI insights rejects empty submission', { tag: ['@overview', '@HB-OVERVIEW-040'] }, async ({ page }) => {
+  test('HB-OVERVIEW-040: AI insights rejects empty submission @T03037EF0', { tag: ['@overview', '@HB-OVERVIEW-040'] }, async ({ page }) => {
     const promptInput = page.locator(
       'input[placeholder*="Ask me anything" i], textarea[placeholder*="Ask me anything" i]',
     ).first();
@@ -328,7 +328,7 @@ test.describe('Overview - logged in', () => {
     }, 'AI prompt input not present.');
   });
 
-  test('HB-OVERVIEW-044: Net Profit equals Total Revenue minus Total Expenses', { tag: ['@overview', '@HB-OVERVIEW-044'] }, async ({ page }) => {
+  test('HB-OVERVIEW-044: Net Profit equals Total Revenue minus Total Expenses @T7ADBDDD7', { tag: ['@overview', '@HB-OVERVIEW-044'] }, async ({ page }) => {
     const revenue = await getMetricValue(page, 'Total Revenue');
     const expenses = await getMetricValue(page, 'Total Expenses');
     const netProfit = await getMetricValue(page, 'Net Profit');
@@ -339,7 +339,7 @@ test.describe('Overview - logged in', () => {
     expect(Math.round(revenue - expenses)).toBeCloseTo(Math.round(netProfit), 0);
   });
 
-  test('HB-OVERVIEW-045: Expense/Sales Ratio matches Total Expenses divided by Total Revenue', { tag: ['@overview', '@HB-OVERVIEW-045'] }, async ({ page }) => {
+  test('HB-OVERVIEW-045: Expense/Sales Ratio matches Total Expenses divided by Total Revenue @TEA86C968', { tag: ['@overview', '@HB-OVERVIEW-045'] }, async ({ page }) => {
     const revenue = await getMetricValue(page, 'Total Revenue');
     const expenses = await getMetricValue(page, 'Total Expenses');
     const ratioText = await getMetricValue(page, 'Expense/Sales Ratio');

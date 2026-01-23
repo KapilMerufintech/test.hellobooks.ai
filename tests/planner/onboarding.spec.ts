@@ -219,52 +219,54 @@ function buildPlanMarkdown(data) {
   return lines.join('\n');
 }
 
-test('planner onboarding', async ({ page }) => {
-  const baseUrl = 'https://test.hellobooks.ai';
-  const planData = {
-    baseUrl,
-    userEmail: 'fikoy39188@emaxasp.com',
-    login: null,
-    signup: null,
-    reset: null,
-    postLogin: null,
-  };
+test.describe('@onboarding Onboarding Planner @SC43A54BB', () => {
+  test('planner onboarding @TFD934BC8', async ({ page }) => {
+    const baseUrl = 'https://test.hellobooks.ai';
+    const planData = {
+      baseUrl,
+      userEmail: 'fikoy39188@emaxasp.com',
+      login: null,
+      signup: null,
+      reset: null,
+      postLogin: null,
+    };
 
-  await page.goto(`${baseUrl}/login`);
-  await page.waitForLoadState('domcontentloaded');
-
-  const loginSnapshot = await collectPageSnapshot(page);
-  const loginText = [...loginSnapshot.buttons, ...loginSnapshot.links].join(' ').toLowerCase();
-  loginSnapshot.ssoProviders = detectProviders(loginSnapshot.buttons, loginSnapshot.links);
-  loginSnapshot.otpAvailable = /otp|one[-\s]?time|magic link|email me a link/.test(loginText);
-  planData.login = loginSnapshot;
-
-  const signupNavigated = await tryNavigateByText(page, [
-    /sign up/i,
-    /create account/i,
-    /register/i,
-    /get started/i,
-  ]);
-  if (signupNavigated) {
-    planData.signup = await collectPageSnapshot(page);
     await page.goto(`${baseUrl}/login`);
     await page.waitForLoadState('domcontentloaded');
-  }
 
-  const resetNavigated = await tryNavigateByText(page, [
-    /forgot password/i,
-    /reset password/i,
-  ]);
-  if (resetNavigated) {
-    planData.reset = await collectPageSnapshot(page);
-    await page.goto(`${baseUrl}/login`);
-    await page.waitForLoadState('domcontentloaded');
-  }
+    const loginSnapshot = await collectPageSnapshot(page);
+    const loginText = [...loginSnapshot.buttons, ...loginSnapshot.links].join(' ').toLowerCase();
+    loginSnapshot.ssoProviders = detectProviders(loginSnapshot.buttons, loginSnapshot.links);
+    loginSnapshot.otpAvailable = /otp|one[-\s]?time|magic link|email me a link/.test(loginText);
+    planData.login = loginSnapshot;
 
-  await login(page);
-  planData.postLogin = await collectPageSnapshot(page);
+    const signupNavigated = await tryNavigateByText(page, [
+      /sign up/i,
+      /create account/i,
+      /register/i,
+      /get started/i,
+    ]);
+    if (signupNavigated) {
+      planData.signup = await collectPageSnapshot(page);
+      await page.goto(`${baseUrl}/login`);
+      await page.waitForLoadState('domcontentloaded');
+    }
 
-  const plan = buildPlanMarkdown(planData);
-  const outputPath = path.join(process.cwd(), 'specs', 'onboarding-plan.md');
-  await fs.writeFile(outputPath, plan, 'utf8');
+    const resetNavigated = await tryNavigateByText(page, [
+      /forgot password/i,
+      /reset password/i,
+    ]);
+    if (resetNavigated) {
+      planData.reset = await collectPageSnapshot(page);
+      await page.goto(`${baseUrl}/login`);
+      await page.waitForLoadState('domcontentloaded');
+    }
+
+    await login(page);
+    planData.postLogin = await collectPageSnapshot(page);
+
+    const plan = buildPlanMarkdown(planData);
+    const outputPath = path.join(process.cwd(), 'specs', 'onboarding-plan.md');
+    await fs.writeFile(outputPath, plan, 'utf8');
+  });
 });

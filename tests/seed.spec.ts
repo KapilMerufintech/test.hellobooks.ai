@@ -1,9 +1,13 @@
-import { test } from '@playwright/test';
-import { login } from './utils/login';
-
-test.setTimeout(120000);
-
-test('seed', async ({ page }) => {
-  await login(page);
-});
+import { test } from '@playwright/test'; 
+ 
+test('seed', async ({ page }) => { 
+  await page.goto('https://test.hellobooks.ai/login'); 
+ 
+  await page.fill('input[name="email"]', 'fapopi7433@feanzier.com'); 
+  await page.fill('input[name="password"]', 'Kapil08dangar@'); 
+ 
+  await page.click('button[type="submit"]'); 
+ 
+  await page.waitForLoadState('networkidle'); 
+}); 
  

@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { login } from './utils/login';
+import { login } from '../utils/login';
 
 test.setTimeout(120000);
 

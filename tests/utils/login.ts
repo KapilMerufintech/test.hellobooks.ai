@@ -1,5 +1,5 @@
 const defaultCredentials = {
-  email: 'gowifa1510@gavrom.com',
+  email: 'fapopi7433@feanzier.com',
   password: 'Kapil08dangar@',
 };
 

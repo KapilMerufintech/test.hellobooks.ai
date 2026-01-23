@@ -219,8 +219,8 @@ function buildPlanMarkdown(data) {
   return lines.join('\n');
 }
 
-test.describe('@onboarding Onboarding Planner @SC43A54BB', () => {
-  test('planner onboarding @TFD934BC8', async ({ page }) => {
+test.describe('@onboarding Onboarding Planner @sc43a54bb', () => {
+  test('planner onboarding @tfd934bc8', async ({ page }) => {
     const baseUrl = 'https://test.hellobooks.ai';
     const planData = {
       baseUrl,

@@ -48,8 +48,8 @@ async function openFirstRowDetails(page: Page) {
   return true;
 }
 
-test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
-  test('HB-BANK-001: Access Banking from left navigation @tafab0e51', { tag: ['@bank', '@HB-BANK-001'] }, async ({ page }) => {
+test.describe('@banking Banking / Transactions - First 20 @S9f24e5fc', () => {
+  test('HB-BANK-001: Access Banking from left navigation @Tafab0e51', { tag: ['@bank', '@HB-BANK-001'] }, async ({ page }) => {
     await seedLogin(page);
     const banking = page.getByRole('button', { name: /banking/i }).first();
     await optionalAction(banking, async () => {
@@ -59,7 +59,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Banking nav not present.');
   });
 
-  test('HB-BANK-002: Direct URL access to Banking Transactions @t857fa841', { tag: ['@bank', '@HB-BANK-002'] }, async ({ page }) => {
+  test('HB-BANK-002: Direct URL access to Banking Transactions @T857fa841', { tag: ['@bank', '@HB-BANK-002'] }, async ({ page }) => {
     await page.goto(`${baseUrl}/?tab=transactions`);
     await seedLogin(page);
     if (!/tab=transactions/i.test(page.url())) {
@@ -68,13 +68,13 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     await expect(page).toHaveURL(/tab=transactions/i);
   });
 
-  test('HB-BANK-003: Banking page blocks access when not authenticated @tc970596d', { tag: ['@bank', '@HB-BANK-003'] }, async ({ page }) => {
+  test('HB-BANK-003: Banking page blocks access when not authenticated @Tc970596d', { tag: ['@bank', '@HB-BANK-003'] }, async ({ page }) => {
     await page.goto(`${baseUrl}/?tab=transactions`);
     await page.waitForLoadState('domcontentloaded');
     await expect(page).toHaveURL(/\/login/i);
   });
 
-  test('HB-BANK-004: Transactions table renders with expected columns @t3b8830f6', { tag: ['@bank', '@HB-BANK-004'] }, async ({ page }) => {
+  test('HB-BANK-004: Transactions table renders with expected columns @T3b8830f6', { tag: ['@bank', '@HB-BANK-004'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const headers = getTableHeaders(page);
@@ -87,7 +87,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     expect(hits).toBeGreaterThanOrEqual(4);
   });
 
-  test('HB-BANK-005: Default date range is applied on load @t0c68a919', { tag: ['@bank', '@HB-BANK-005'] }, async ({ page }) => {
+  test('HB-BANK-005: Default date range is applied on load @T0c68a919', { tag: ['@bank', '@HB-BANK-005'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const dateFilter = page.getByText(/all time|last|date range|period/i).first();
@@ -96,7 +96,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Date range indicator not found.');
   });
 
-  test('HB-BANK-006: Search filters transactions by keyword @teb4b58f8', { tag: ['@bank', '@HB-BANK-006'] }, async ({ page }) => {
+  test('HB-BANK-006: Search filters transactions by keyword @Teb4b58f8', { tag: ['@bank', '@HB-BANK-006'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const searchInput = getSearchInput(page);
@@ -113,7 +113,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Search input not present.');
   });
 
-  test('HB-BANK-007: Search by amount matches numeric values @td15912c8', { tag: ['@bank', '@HB-BANK-007'] }, async ({ page }) => {
+  test('HB-BANK-007: Search by amount matches numeric values @Td15912c8', { tag: ['@bank', '@HB-BANK-007'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const searchInput = getSearchInput(page);
@@ -134,7 +134,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Search input not present.');
   });
 
-  test('HB-BANK-008: Clear search restores full list @t32353363', { tag: ['@bank', '@HB-BANK-008'] }, async ({ page }) => {
+  test('HB-BANK-008: Clear search restores full list @T32353363', { tag: ['@bank', '@HB-BANK-008'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const searchInput = getSearchInput(page);
@@ -145,7 +145,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Search input not present.');
   });
 
-  test('HB-BANK-009: Sorting by Date toggles ascending/descending @t78925045', { tag: ['@bank', '@HB-BANK-009'] }, async ({ page }) => {
+  test('HB-BANK-009: Sorting by Date toggles ascending/descending @T78925045', { tag: ['@bank', '@HB-BANK-009'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const dateHeader = page.getByRole('columnheader', { name: /date/i }).first();
@@ -156,7 +156,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Date column header not present.');
   });
 
-  test('HB-BANK-010: Sorting by Amount toggles ascending/descending @tfa44ef19', { tag: ['@bank', '@HB-BANK-010'] }, async ({ page }) => {
+  test('HB-BANK-010: Sorting by Amount toggles ascending/descending @Tfa44ef19', { tag: ['@bank', '@HB-BANK-010'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const amountHeader = page.getByRole('columnheader', { name: /amount/i }).first();
@@ -167,7 +167,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Amount column header not present.');
   });
 
-  test('HB-BANK-011: Pagination next/previous works @t7621c872', { tag: ['@bank', '@HB-BANK-011'] }, async ({ page }) => {
+  test('HB-BANK-011: Pagination next/previous works @T7621c872', { tag: ['@bank', '@HB-BANK-011'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const next = page.getByRole('button', { name: /next/i }).first();
@@ -180,7 +180,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Next button not present.');
   });
 
-  test('HB-BANK-012: Page size selector changes row count @tcefa7083', { tag: ['@bank', '@HB-BANK-012'] }, async ({ page }) => {
+  test('HB-BANK-012: Page size selector changes row count @Tcefa7083', { tag: ['@bank', '@HB-BANK-012'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const pageSize = page.getByRole('button', { name: /^\s*\d+\s*$/ }).first();
@@ -193,7 +193,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Page size selector not found.');
   });
 
-  test('HB-BANK-013: Filter by Match Status @t37c67f14', { tag: ['@bank', '@HB-BANK-013'] }, async ({ page }) => {
+  test('HB-BANK-013: Filter by Match Status @T37c67f14', { tag: ['@bank', '@HB-BANK-013'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const filterButton = page.getByRole('button', { name: /filter/i }).first();
@@ -210,7 +210,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Filter button not found.');
   });
 
-  test('HB-BANK-014: Filter by Date Range @teeeaf428', { tag: ['@bank', '@HB-BANK-014'] }, async ({ page }) => {
+  test('HB-BANK-014: Filter by Date Range @Teeeaf428', { tag: ['@bank', '@HB-BANK-014'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const dateRange = page.getByRole('button', { name: /date range|period|custom|all time/i }).first();
@@ -223,7 +223,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Date range control not found.');
   });
 
-  test('HB-BANK-015: Clear filters resets to default list @tba4560bb', { tag: ['@bank', '@HB-BANK-015'] }, async ({ page }) => {
+  test('HB-BANK-015: Clear filters resets to default list @Tba4560bb', { tag: ['@bank', '@HB-BANK-015'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const clearFilters = page.getByRole('button', { name: /clear|reset/i }).first();
@@ -232,7 +232,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Clear filters button not found.');
   });
 
-  test('HB-BANK-016: Transactions show positive/negative signage correctly @t0e86c7bd', { tag: ['@bank', '@HB-BANK-016'] }, async ({ page }) => {
+  test('HB-BANK-016: Transactions show positive/negative signage correctly @T0e86c7bd', { tag: ['@bank', '@HB-BANK-016'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const row = await firstRow(page);
@@ -244,7 +244,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     await expect(amountCell).toBeVisible({ timeout: 10000 });
   });
 
-  test('HB-BANK-017: Transaction row opens details drawer @t91673378', { tag: ['@bank', '@HB-BANK-017'] }, async ({ page }) => {
+  test('HB-BANK-017: Transaction row opens details drawer @T91673378', { tag: ['@bank', '@HB-BANK-017'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const row = await firstRow(page);
@@ -257,7 +257,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     await expect(details).toBeVisible({ timeout: 10000 });
   });
 
-  test('HB-BANK-018: Transaction details include amount, date, and account @t0d952bd4', { tag: ['@bank', '@HB-BANK-018'] }, async ({ page }) => {
+  test('HB-BANK-018: Transaction details include amount, date, and account @T0d952bd4', { tag: ['@bank', '@HB-BANK-018'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const row = await firstRow(page);
@@ -271,7 +271,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     await expect(page.getByText(/account/i).first()).toBeVisible();
   });
 
-  test('HB-BANK-019: Add Transaction button opens create form @t6370fe04', { tag: ['@bank', '@HB-BANK-019'] }, async ({ page }) => {
+  test('HB-BANK-019: Add Transaction button opens create form @T6370fe04', { tag: ['@bank', '@HB-BANK-019'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const addButton = page.getByRole('button', { name: /add transaction/i }).first();
@@ -281,7 +281,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Add Transaction button not found.');
   });
 
-  test('HB-BANK-020: Create transaction with required fields @ta564a269', { tag: ['@bank', '@HB-BANK-020'] }, async ({ page }) => {
+  test('HB-BANK-020: Create transaction with required fields @Ta564a269', { tag: ['@bank', '@HB-BANK-020'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const addButton = page.getByRole('button', { name: /add transaction/i }).first();
@@ -306,7 +306,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Add Transaction button not found.');
   });
 
-  test('HB-BANK-021: Create transaction validates required fields @tdce4f34e', { tag: ['@bank', '@HB-BANK-021'] }, async ({ page }) => {
+  test('HB-BANK-021: Create transaction validates required fields @Tdce4f34e', { tag: ['@bank', '@HB-BANK-021'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const addButton = page.getByRole('button', { name: /add transaction/i }).first();
@@ -320,7 +320,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Add Transaction button not found.');
   });
 
-  test('HB-BANK-022: Edit transaction updates values @t423b84bb', { tag: ['@bank', '@HB-BANK-022'] }, async ({ page }) => {
+  test('HB-BANK-022: Edit transaction updates values @T423b84bb', { tag: ['@bank', '@HB-BANK-022'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -339,7 +339,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Edit button not found.');
   });
 
-  test('HB-BANK-023: Delete transaction removes from list @t441feaba', { tag: ['@bank', '@HB-BANK-023'] }, async ({ page }) => {
+  test('HB-BANK-023: Delete transaction removes from list @T441feaba', { tag: ['@bank', '@HB-BANK-023'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -354,7 +354,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Delete button not found.');
   });
 
-  test('HB-BANK-024: Import bank statement opens upload flow @t675c234e', { tag: ['@bank', '@HB-BANK-024'] }, async ({ page }) => {
+  test('HB-BANK-024: Import bank statement opens upload flow @T675c234e', { tag: ['@bank', '@HB-BANK-024'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const importButton = page.getByRole('button', { name: /import/i }).first();
@@ -364,7 +364,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Import button not found.');
   });
 
-  test('HB-BANK-025: Import rejects unsupported file type @t08c2f60e', { tag: ['@bank', '@HB-BANK-025'] }, async ({ page }) => {
+  test('HB-BANK-025: Import rejects unsupported file type @T08c2f60e', { tag: ['@bank', '@HB-BANK-025'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const importButton = page.getByRole('button', { name: /import/i }).first();
@@ -377,7 +377,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Import button not found.');
   });
 
-  test('HB-BANK-026: Import shows mapping for bank file columns @t392a7756', { tag: ['@bank', '@HB-BANK-026'] }, async ({ page }) => {
+  test('HB-BANK-026: Import shows mapping for bank file columns @T392a7756', { tag: ['@bank', '@HB-BANK-026'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const importButton = page.getByRole('button', { name: /import/i }).first();
@@ -387,7 +387,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Import button not found.');
   });
 
-  test('HB-BANK-027: Import creates transactions and shows summary @taad6ffb5', { tag: ['@bank', '@HB-BANK-027'] }, async ({ page }) => {
+  test('HB-BANK-027: Import creates transactions and shows summary @Taad6ffb5', { tag: ['@bank', '@HB-BANK-027'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const importButton = page.getByRole('button', { name: /import/i }).first();
@@ -400,7 +400,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Import button not found.');
   });
 
-  test('HB-BANK-028: Duplicate detection flags duplicates on import @t28af4600', { tag: ['@bank', '@HB-BANK-028'] }, async ({ page }) => {
+  test('HB-BANK-028: Duplicate detection flags duplicates on import @T28af4600', { tag: ['@bank', '@HB-BANK-028'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const importButton = page.getByRole('button', { name: /import/i }).first();
@@ -413,7 +413,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Import button not found.');
   });
 
-  test('HB-BANK-029: Reconciliation tab is accessible @t366ba58a', { tag: ['@bank', '@HB-BANK-029'] }, async ({ page }) => {
+  test('HB-BANK-029: Reconciliation tab is accessible @T366ba58a', { tag: ['@bank', '@HB-BANK-029'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const reconciliation = page.getByRole('link', { name: /reconciliation/i }).first();
@@ -428,7 +428,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Reconciliation tab not found.');
   });
 
-  test('HB-BANK-030: Match transaction to invoice/bill @t0453c995', { tag: ['@bank', '@HB-BANK-030'] }, async ({ page }) => {
+  test('HB-BANK-030: Match transaction to invoice/bill @T0453c995', { tag: ['@bank', '@HB-BANK-030'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const reconciliation = page.getByRole('link', { name: /reconciliation/i }).first();
@@ -441,7 +441,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Reconciliation tab not found.');
   });
 
-  test('HB-BANK-031: Unmatch a previously matched transaction @tde09b7ee', { tag: ['@bank', '@HB-BANK-031'] }, async ({ page }) => {
+  test('HB-BANK-031: Unmatch a previously matched transaction @Tde09b7ee', { tag: ['@bank', '@HB-BANK-031'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const reconciliation = page.getByRole('link', { name: /reconciliation/i }).first();
@@ -454,7 +454,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Reconciliation tab not found.');
   });
 
-  test('HB-BANK-032: Split transaction into multiple categories @ta84c0725', { tag: ['@bank', '@HB-BANK-032'] }, async ({ page }) => {
+  test('HB-BANK-032: Split transaction into multiple categories @Ta84c0725', { tag: ['@bank', '@HB-BANK-032'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -466,7 +466,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Split button not found.');
   });
 
-  test('HB-BANK-033: Assign contact (payee) to transaction @tdb29df65', { tag: ['@bank', '@HB-BANK-033'] }, async ({ page }) => {
+  test('HB-BANK-033: Assign contact (payee) to transaction @Tdb29df65', { tag: ['@bank', '@HB-BANK-033'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -477,7 +477,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Contact field not found.');
   });
 
-  test('HB-BANK-034: Assign tax code to transaction @td77cc2e2', { tag: ['@bank', '@HB-BANK-034'] }, async ({ page }) => {
+  test('HB-BANK-034: Assign tax code to transaction @Td77cc2e2', { tag: ['@bank', '@HB-BANK-034'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -488,7 +488,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Tax field not found.');
   });
 
-  test('HB-BANK-035: Attach receipt to transaction @tad124875', { tag: ['@bank', '@HB-BANK-035'] }, async ({ page }) => {
+  test('HB-BANK-035: Attach receipt to transaction @Tad124875', { tag: ['@bank', '@HB-BANK-035'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -500,7 +500,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Attachment action not found.');
   });
 
-  test('HB-BANK-036: Transaction memo supports max length @t36fe76e0', { tag: ['@bank', '@HB-BANK-036'] }, async ({ page }) => {
+  test('HB-BANK-036: Transaction memo supports max length @T36fe76e0', { tag: ['@bank', '@HB-BANK-036'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const opened = await openFirstRowDetails(page);
@@ -512,7 +512,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Memo field not found.');
   });
 
-  test('HB-BANK-037: Bank account switch changes transaction list @td49682ca', { tag: ['@bank', '@HB-BANK-037'] }, async ({ page }) => {
+  test('HB-BANK-037: Bank account switch changes transaction list @Td49682ca', { tag: ['@bank', '@HB-BANK-037'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const accountSelector = page.getByRole('combobox', { name: /account/i }).first();
@@ -525,7 +525,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Account selector not found.');
   });
 
-  test('HB-BANK-038: Account balance matches sum of transactions (approx) @t256db742', { tag: ['@bank', '@HB-BANK-038'] }, async ({ page }) => {
+  test('HB-BANK-038: Account balance matches sum of transactions (approx) @T256db742', { tag: ['@bank', '@HB-BANK-038'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const balance = page.getByText(/balance/i).first();
@@ -534,7 +534,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Balance not visible.');
   });
 
-  test('HB-BANK-039: Export transactions to CSV (if present) @te14f2f93', { tag: ['@bank', '@HB-BANK-039'] }, async ({ page }) => {
+  test('HB-BANK-039: Export transactions to CSV (if present) @Te14f2f93', { tag: ['@bank', '@HB-BANK-039'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const exportButton = page.getByRole('button', { name: /export/i }).first();
@@ -548,13 +548,13 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Export button not found.');
   });
 
-  test('HB-BANK-040: Error state on Banking API failure @t061ba244', { tag: ['@bank', '@HB-BANK-040'] }, async ({ page }) => {
+  test('HB-BANK-040: Error state on Banking API failure @T061ba244', { tag: ['@bank', '@HB-BANK-040'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     test.info().annotations.push({ type: 'note', description: 'Manual-only: requires API error simulation.' });
   });
 
-  test('HB-BANK-041: Empty state when no transactions @te1b39aa9', { tag: ['@bank', '@HB-BANK-041'] }, async ({ page }) => {
+  test('HB-BANK-041: Empty state when no transactions @Te1b39aa9', { tag: ['@bank', '@HB-BANK-041'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const emptyState = page.getByText(/no transactions|empty/i).first();
@@ -563,7 +563,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Empty state not detected.');
   });
 
-  test('HB-BANK-042: Transactions list persists filters on refresh @t875a956e', { tag: ['@bank', '@HB-BANK-042'] }, async ({ page }) => {
+  test('HB-BANK-042: Transactions list persists filters on refresh @T875a956e', { tag: ['@bank', '@HB-BANK-042'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const filterButton = page.getByRole('button', { name: /filter/i }).first();
@@ -582,13 +582,13 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Filter button not found.');
   });
 
-  test('HB-BANK-043: Unauthorized user cannot access Banking @t1110a6cd', { tag: ['@bank', '@HB-BANK-043'] }, async ({ page }) => {
+  test('HB-BANK-043: Unauthorized user cannot access Banking @T1110a6cd', { tag: ['@bank', '@HB-BANK-043'] }, async ({ page }) => {
     await page.goto(`${baseUrl}/?tab=transactions`);
     await page.waitForLoadState('domcontentloaded');
     await expect(page).toHaveURL(/\/login/i);
   });
 
-  test('HB-BANK-044: Transaction confidence values display properly @t105db8c3', { tag: ['@bank', '@HB-BANK-044'] }, async ({ page }) => {
+  test('HB-BANK-044: Transaction confidence values display properly @T105db8c3', { tag: ['@bank', '@HB-BANK-044'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const confidenceHeader = page.getByRole('columnheader', { name: /confidence/i }).first();
@@ -605,7 +605,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Confidence column not present.');
   });
 
-  test('HB-BANK-045: Match Status filter counts reflect list totals @t26952a5c', { tag: ['@bank', '@HB-BANK-045'] }, async ({ page }) => {
+  test('HB-BANK-045: Match Status filter counts reflect list totals @T26952a5c', { tag: ['@bank', '@HB-BANK-045'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const statusBadges = page.getByText(/matched|unmatched/i).first();
@@ -618,13 +618,13 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Match status badges not found.');
   });
 
-  test('HB-BANK-046: Reconciliation action updates audit trail (if present) @t1e0e17cf', { tag: ['@bank', '@HB-BANK-046'] }, async ({ page }) => {
+  test('HB-BANK-046: Reconciliation action updates audit trail (if present) @T1e0e17cf', { tag: ['@bank', '@HB-BANK-046'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     test.info().annotations.push({ type: 'note', description: 'Manual-only: audit trail UI not confirmed.' });
   });
 
-  test('HB-BANK-047: Transaction list supports horizontal scroll on small screens @tec570bf4', { tag: ['@bank', '@HB-BANK-047'] }, async ({ page }) => {
+  test('HB-BANK-047: Transaction list supports horizontal scroll on small screens @Tec570bf4', { tag: ['@bank', '@HB-BANK-047'] }, async ({ page }) => {
     await seedLogin(page);
     await page.setViewportSize({ width: 375, height: 667 });
     await openTransactions(page);
@@ -632,7 +632,7 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     expect(bodyWidth).toBeGreaterThanOrEqual(375);
   });
 
-  test('HB-BANK-048: Transactions list handles large amounts without overflow @t151a2610', { tag: ['@bank', '@HB-BANK-048'] }, async ({ page }) => {
+  test('HB-BANK-048: Transactions list handles large amounts without overflow @T151a2610', { tag: ['@bank', '@HB-BANK-048'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const amountCell = page.locator('table tbody tr td, [role="cell"]').filter({ hasText: /\d{4,}/ }).first();
@@ -641,13 +641,13 @@ test.describe('@banking Banking / Transactions - First 20 @s9f24e5fc', () => {
     }, 'Large amount not detected.');
   });
 
-  test('HB-BANK-049: Transaction date respects timezone @t46472fa1', { tag: ['@bank', '@HB-BANK-049'] }, async ({ page }) => {
+  test('HB-BANK-049: Transaction date respects timezone @T46472fa1', { tag: ['@bank', '@HB-BANK-049'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     test.info().annotations.push({ type: 'note', description: 'Manual-only: requires source system date.' });
   });
 
-  test('HB-BANK-050: No sensitive data in Banking URL @t4e9313d8', { tag: ['@bank', '@HB-BANK-050'] }, async ({ page }) => {
+  test('HB-BANK-050: No sensitive data in Banking URL @T4e9313d8', { tag: ['@bank', '@HB-BANK-050'] }, async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const url = page.url();

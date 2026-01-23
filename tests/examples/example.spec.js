@@ -1,15 +1,15 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test.describe('@examples Example @s2e9a2b43', () => {
-  test('has title @t5134c30a', async ({ page }) => {
+test.describe('@examples Example @S2e9a2b43', () => {
+  test('has title @T5134c30a', async ({ page }) => {
     await page.goto('https://playwright.dev/');
 
     // Expect a title "to contain" a substring.
     await expect(page).toHaveTitle(/Playwright/);
   });
 
-  test('get started link @t0c17bdd8', async ({ page }) => {
+  test('get started link @T0c17bdd8', async ({ page }) => {
     await page.goto('https://playwright.dev/');
 
     // Click the get started link.

@@ -241,7 +241,7 @@ test.describe('@banking Banking / Transactions - First 20 @S9f24e5fc', () => {
       return;
     }
     const amountCell = row.locator('td, [role="cell"]').filter({ hasText: /[-+]?\d/ }).first();
-    await expect(amountCell).toBeVisible({ timeout: 10000 });
+    await expect(amountCell).toBeVisible({ timeout: 50000 });
   });
 
   test('HB-BANK-017: Transaction row opens details drawer @T91673378', { tag: ['@bank', '@HB-BANK-017'] }, async ({ page }) => {

@@ -1,28 +1,20 @@
-const defaultCredentials = {
-  email: 'fapopi7433@feanzier.com',
-  password: 'Kapil08dangar@',
-};
+import type { Page } from '@playwright/test';
 
-export async function login(page, credentials = defaultCredentials) {
-  await page.goto('https://test.hellobooks.ai/login');
-
-  const emailField = page.locator(
-    'input[name="email"], input[type="email"], input[placeholder*="Email" i], input[aria-label*="Email" i]',
-  );
-  await emailField.first().waitFor({ state: 'visible', timeout: 60000 });
-  await emailField.first().fill(credentials.email);
-
-  const passwordField = page.locator(
-    'input[name="password"], input[type="password"], input[placeholder*="Password" i], input[aria-label*="Password" i]',
-  );
-  await passwordField.first().waitFor({ state: 'visible', timeout: 60000 });
-  await passwordField.first().fill(credentials.password);
-
-  const submitButton = page.locator(
-    'button[type="submit"], button:has-text("Login"), button:has-text("Sign in"), button:has-text("Log in")',
-  );
-  await submitButton.first().waitFor({ state: 'visible', timeout: 30000 });
-  await submitButton.first().click();
-
+export async function login(page: Page) {
+  const baseUrl = 'https://dev.hellobooks.ai';
+  
+  // Navigate to login page
+  await page.goto(`${baseUrl}/login`);
+  await page.waitForLoadState('domcontentloaded');
+  
+  // Fill credentials - UPDATE THESE with valid test account
+  await page.fill('input[type="email"], input[name="email"], #email', 'harshpadaliya@merufintech.net');
+  await page.fill('input[type="password"], input[name="password"], #password', 'Harsh@12345');
+  
+  // Click submit
+  await page.click('button[type="submit"], button:has-text("Sign in"), button:has-text("Login")');
+  
+  // Wait for navigation away from login
+  await page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 30000 });
   await page.waitForLoadState('networkidle');
 }

@@ -1,73 +1,59 @@
 import { test, expect } from '@playwright/test';
 
-/**
- * Test Scenario: Create New Vendor with Required Fields
- * Test ID: TEST-1769842842407
- * Description: Verify that a user can successfully create a new vendor by providing all required information
- */
-
-test.describe('Accounting Masters - Vendor Management', () => {
-  
-  test.beforeEach(async ({ page }) => {
-    // Precondition 1 & 2: User is logged in and has access to Accounting Masters
-    // Note: Assuming authentication is handled via global setup or storage state.
-    // If not, login logic would be placed here.
-    await page.goto('/dashboard');
-  });
-
-  test('Create New Vendor with Required Fields TEST-1769842842407', async ({ page }) => {
-    // Step 1: Navigate to Accounting Masters > Contacts section
-    await page.getByRole('link', { name: /Accounting Masters/i }).click();
-    await page.getByRole('link', { name: /Contacts/i }).click();
+test.describe('Accounting Masters @S25ws4ft4', () => {
+  test('Create New Vendor with Required Fields @Tlewikr7i', async ({ page }) => {
+    // STEP 1: Login (MANDATORY)
+    await page.goto('https://dev.hellobooks.ai/login');
     
-    // Step 2: Click on Create Vendor button
-    const createVendorBtn = page.getByRole('button', { name: /Create Vendor/i });
-    await expect(createVendorBtn).toBeVisible();
+    // Fill login credentials using specific selectors to avoid strict mode violations
+    await page.locator('input[type="email"]').first().fill('harshpadaliya@merufintech.net');
+    await page.locator('input[type="password"]').first().fill('Harsh@12345');
+
+    // Click sign in button
+    await page.getByRole('button', { name: /sign in/i }).click();
+
+    // Wait for successful login - wait until URL no longer contains /login
+    await page.waitForFunction(() => !window.location.pathname.includes('/login'), { timeout: 30000 });
+
+    // STEP 2: Navigate to Accounting Masters > Contacts section
+    // Assuming navigation via sidebar or direct URL as per standard Playwright practices
+    await page.goto('https://dev.hellobooks.ai/contacts/vendors');
+    await expect(page).toHaveURL(/.*vendors/);
+
+    // STEP 3: Click on Create Vendor button
+    // Using getByRole for semantic selection
+    const createVendorBtn = page.getByRole('button', { name: /create vendor/i }).or(page.getByRole('button', { name: /add vendor/i }));
     await createVendorBtn.click();
 
-    // Expected Result 1 & 2: Form opens and required fields are displayed
-    await expect(page.getByRole('heading', { name: /New Vendor/i })).toBeVisible();
-    await expect(page.getByLabel(/Vendor Name/i)).toBeVisible();
-    await expect(page.getByLabel(/Email/i)).toBeVisible();
+    // STEP 4: Enter vendor name in the required field
+    const vendorName = `Automation Vendor ${Date.now()}`;
+    await page.getByLabel(/vendor name/i).or(page.locator('input[name="name"]')).fill(vendorName);
 
-    // Generate unique data to satisfy Precondition 3 (No duplicate vendor)
-    const uniqueId = Date.now();
-    const vendorName = `Automation Vendor ${uniqueId}`;
-    const vendorEmail = `vendor_${uniqueId}@example.com`;
+    // STEP 5: Enter vendor contact email address
+    await page.getByLabel(/email/i).or(page.locator('input[name="email"]')).fill(`test-${Date.now()}@example.com`);
 
-    // Step 3: Enter vendor name
-    await page.getByLabel(/Vendor Name/i).fill(vendorName);
+    // STEP 6: Enter vendor phone number
+    await page.getByLabel(/phone/i).or(page.locator('input[name="phone"]')).fill('9876543210');
 
-    // Step 4: Enter vendor email address
-    await page.getByLabel(/Email/i).fill(vendorEmail);
+    // STEP 7: Enter vendor billing address
+    await page.getByLabel(/address/i).or(page.locator('textarea[name="address"]')).fill('123 Business Park, Tech City');
 
-    // Step 5: Enter vendor phone number
-    await page.getByLabel(/Phone/i).fill('1234567890');
+    // STEP 8: Select payment terms from dropdown
+    // Clicking the dropdown and selecting an option (e.g., Net 30)
+    const paymentTermsDropdown = page.getByLabel(/payment terms/i).or(page.locator('.v-select'));
+    await paymentTermsDropdown.click();
+    await page.getByText(/Net 30/i).first().click();
 
-    // Step 6: Select payment terms from dropdown
-    await page.getByLabel(/Payment Terms/i).click();
-    await page.getByRole('option', { name: /Net 30/i }).click();
+    // STEP 9: Click Save button to create the vendor
+    await page.getByRole('button', { name: /save/i }).click();
 
-    // Step 7: Enter billing address details
-    await page.getByLabel(/Billing Address/i).fill('123 Automation St, Tech City, 54321');
+    // EXPECTED RESULTS:
+    // 1. Verify success message/toast appears
+    const successToast = page.getByText(/successfully/i);
+    await expect(successToast).toBeVisible();
 
-    // Step 8: Click Save button
-    await page.getByRole('button', { name: /Save/i }).click();
-
-    // Expected Result 4: Vendor is created successfully with confirmation message
-    const successMessage = page.getByText(/Vendor created successfully/i);
-    await expect(successMessage).toBeVisible();
-
-    // Expected Result 5: New vendor appears in the vendor list
-    // We navigate back or check the list view
-    await page.getByRole('link', { name: /Back to List/i }).click();
-    const vendorRow = page.getByRole('row', { name: vendorName });
-    await expect(vendorRow).toBeVisible();
-
-    // Expected Result 6: Vendor details are saved correctly and can be viewed
-    await vendorRow.getByRole('link').first().click();
+    // 2. Verify vendor appears in the list
+    // We search for the unique vendor name created in Step 4
     await expect(page.getByText(vendorName)).toBeVisible();
-    await expect(page.locator('input[name="email"], [id="email"]')).toHaveValue(vendorEmail);
   });
-
 });

@@ -102,14 +102,16 @@ test.describe('@banking Banking / Transactions - First 20 @S9f24e5fc', () => {
     await expect(page).toHaveURL(/tab=transactions/i);
   });
 
-  test('@Tc970596d @banking HB-BANK-003: Banking page blocks access when not authenticated', async ({ page }) => {
-    await ensureLoggedOut(page);
+  test('@Tc970596d @banking HB-BANK-003: Banking page blocks access when not authenticated', async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
     await page.goto(`${baseUrl}/?tab=transactions`);
     await page.waitForLoadState('domcontentloaded');
-    if (!/\/login/i.test(page.url())) {
-      test.skip(true, 'Session persisted; unable to verify unauthenticated state.');
-    }
     await expect(page).toHaveURL(/\/login/i);
+    await expect(page.getByRole('heading', { name: /login|sign in/i })).toBeVisible();
+
+    await context.close();
   });
 
   test('@T3b8830f6 @banking HB-BANK-004: Transactions table renders with expected columns', async ({ page }) => {
@@ -639,15 +641,25 @@ test.describe('@banking Banking / Transactions - First 20 @S9f24e5fc', () => {
     }, 'Filter button not found.');
   });
 
-  test('@T1110a6cd @banking HB-BANK-043: Unauthorized user cannot access Banking', async ({ page }) => {
-    await ensureLoggedOut(page);
-    await page.goto(`${baseUrl}/?tab=transactions`);
-    await page.waitForLoadState('domcontentloaded');
-    if (!/\/login/i.test(page.url())) {
-      test.skip(true, 'Session persisted; unable to verify unauthenticated state.');
-    }
-    await expect(page).toHaveURL(/\/login/i);
-  });
+test('@T1110a6cd @banking HB-BANK-043: Unauthorized user cannot access Banking', async ({ browser }) => {
+  // Create a clean, unauthenticated context (no cookies, no remember-me)
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Try to access Banking directly
+  await page.goto(`${baseUrl}/?tab=transactions`, { waitUntil: 'domcontentloaded' });
+
+  // Assert access is blocked
+  await expect(page).toHaveURL(/\/login/i);
+
+  // Optional stronger assertion
+  await expect(
+    page.getByRole('heading', { name: /login/i })
+  ).toBeVisible();
+
+  await context.close();
+});
+
 
   test('@T105db8c3 @banking HB-BANK-044: Transaction confidence values display properly', async ({ page }) => {
     await seedLogin(page);

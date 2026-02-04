@@ -1,10 +1,7 @@
-const defaultCredentials = {
-  email: 'fapopi7433@feanzier.com',
-  password: 'Kapil08dangar@',
-};
+import { seedCredentials } from '../seed.data';
 
-export async function login(page, credentials = defaultCredentials) {
-  await page.goto('https://test.hellobooks.ai/login');
+export async function login(page, credentials = seedCredentials) {
+  await page.goto('/login');
 
   const emailField = page.locator(
     'input[name="email"], input[type="email"], input[placeholder*="Email" i], input[aria-label*="Email" i]',
@@ -24,5 +21,6 @@ export async function login(page, credentials = defaultCredentials) {
   await submitButton.first().waitFor({ state: 'visible', timeout: 30000 });
   await submitButton.first().click();
 
-  await page.waitForLoadState('networkidle');
+  await page.waitForLoadState('domcontentloaded');
+  await page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 60000 });
 }

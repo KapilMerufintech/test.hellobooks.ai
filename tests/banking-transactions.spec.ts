@@ -176,12 +176,12 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await resetFilters(page);
   });
 
-  test('Td993e2d8 | HB-BANK-TXN-001: Navigate to Banking > Transactions page', async ({ page }) => {
+  test('Td993e2d8 | HB-BANK-TXN-001: Navigate to Banking > Transactions page @Td993e2d8', async ({ page }) => {
     await expect(page).toHaveURL(/tab=transactions/);
     await page.getByRole('heading', { name: /transactions/i }).first().waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
   });
 
-  test('T092d17af | HB-BANK-TXN-002: Transactions page loads without errors', async ({ page }) => {
+  test('T092d17af | HB-BANK-TXN-002: Transactions page loads without errors @T092d17af', async ({ page }) => {
     const consoleErrors = [];
     page.on('console', (msg) => {
       if (msg.type() === 'error') consoleErrors.push(msg.text());
@@ -195,7 +195,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     }
   });
 
-  test('T00000004 | HB-BANK-TXN-004: Default date range is applied on first load (if present)', async ({ page }) => {
+  test('T00000004 | HB-BANK-TXN-004: Default date range is applied on first load (if present) @T00000004', async ({ page }) => {
     const dateFilter = await getDateFilter(page);
     if (!dateFilter) test.skip(true, 'Date filter not found.');
     const value = await dateFilter.inputValue?.().catch(() => '') || await dateFilter.textContent();
@@ -205,11 +205,11 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(display.length).toBeGreaterThan(0);
   });
 
-  test('T00000005 | HB-BANK-TXN-005: Transactions list/table is visible', async ({ page }) => {
+  test('T00000005 | HB-BANK-TXN-005: Transactions list/table is visible @T00000005', async ({ page }) => {
     await expectRowsOrEmpty(page);
   });
 
-  test('T00000006 | HB-BANK-TXN-006: Empty state appears when no transactions match filters', async ({ page }) => {
+  test('T00000006 | HB-BANK-TXN-006: Empty state appears when no transactions match filters @T00000006', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'No search input to force empty state.');
     await searchInput.fill('no-such-transaction-xyz');
@@ -218,14 +218,14 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(emptyState).toBeVisible();
   });
 
-  test('T00000007 | HB-BANK-TXN-007: Transaction row shows key fields (date, description, amount) if present', async ({ page }) => {
+  test('T00000007 | HB-BANK-TXN-007: Transaction row shows key fields (date, description, amount) if present @T00000007', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     const rowText = await rows.first().innerText();
     expect(rowText.length).toBeGreaterThan(0);
   });
 
-  test('T00000008 | HB-BANK-TXN-008: Amounts are formatted with currency and separators', async ({ page }) => {
+  test('T00000008 | HB-BANK-TXN-008: Amounts are formatted with currency and separators @T00000008', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     const amountCell = rows.locator('td, [role="cell"]').filter({ hasText: /-?\d[\d,.]*/ }).first();
@@ -233,7 +233,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(amountCell).toBeVisible();
   });
 
-  test('T00000009 | HB-BANK-TXN-009: Negative amounts are visually distinguished (if supported)', async ({ page }) => {
+  test('T00000009 | HB-BANK-TXN-009: Negative amounts are visually distinguished (if supported) @T00000009', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     const negativeRow = rows.filter({ hasText: /-\d/ }).first();
@@ -241,7 +241,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(negativeRow).toBeVisible();
   });
 
-  test('T0000000a | HB-BANK-TXN-010: Sorting by date works (if sortable)', async ({ page }) => {
+  test('T0000000a | HB-BANK-TXN-010: Sorting by date works (if sortable) @T0000000a', async ({ page }) => {
     const dateHeader = await firstVisibleLocator([
       page.getByRole('columnheader', { name: /date/i }),
       page.locator('th:has-text("Date"), [role="columnheader"][aria-label*="Date" i]').first(),
@@ -256,7 +256,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(after).not.toEqual(before);
   });
 
-  test('T0000000b | HB-BANK-TXN-011: Sorting persists after refresh (if supported)', async ({ page }) => {
+  test('T0000000b | HB-BANK-TXN-011: Sorting persists after refresh (if supported) @T0000000b', async ({ page }) => {
     const dateHeader = await firstVisibleLocator([
       page.getByRole('columnheader', { name: /date/i }),
       page.locator('th:has-text("Date"), [role="columnheader"][aria-label*="Date" i]').first(),
@@ -274,7 +274,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(firstAfter).toEqual(first);
   });
 
-  test('T0000000c | HB-BANK-TXN-012: Pagination controls appear when results exceed page size (if present)', async ({ page }) => {
+  test('T0000000c | HB-BANK-TXN-012: Pagination controls appear when results exceed page size (if present) @T0000000c', async ({ page }) => {
     const pagination = await firstVisibleLocator([
       page.getByRole('button', { name: /next|previous|page/i }),
       page.locator('[aria-label*="pagination" i], .pagination').first(),
@@ -283,7 +283,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(pagination).toBeVisible();
   });
 
-  test('T0000000d | HB-BANK-TXN-013: Pagination next/previous navigates between pages (if present)', async ({ page }) => {
+  test('T0000000d | HB-BANK-TXN-013: Pagination next/previous navigates between pages (if present) @T0000000d', async ({ page }) => {
     const nextButton = await firstVisibleLocator([
       page.getByRole('button', { name: /next/i }),
       page.locator('button:has-text("Next")').first(),
@@ -300,7 +300,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(firstAfter).not.toEqual(first);
   });
 
-  test('T0000000e | HB-BANK-TXN-014: Page size selector changes row count (if present)', async ({ page }) => {
+  test('T0000000e | HB-BANK-TXN-014: Page size selector changes row count (if present) @T0000000e', async ({ page }) => {
     const sizeSelect = await firstVisibleLocator([
       page.getByRole('combobox', { name: /page size|rows/i }),
       page.locator('select[name*="page" i], select[id*="page" i]').first(),
@@ -315,7 +315,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(after).not.toEqual(before);
   });
 
-  test('T0000000f | HB-BANK-TXN-015: Keyword search filters by description or memo (if present)', async ({ page }) => {
+  test('T0000000f | HB-BANK-TXN-015: Keyword search filters by description or memo (if present) @T0000000f', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     const rows = await ensureRows(page);
@@ -329,7 +329,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(filteredRows.first()).toContainText(term);
   });
 
-  test('T00000010 | HB-BANK-TXN-016: Search supports partial matches (if present)', async ({ page }) => {
+  test('T00000010 | HB-BANK-TXN-016: Search supports partial matches (if present) @T00000010', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     const rows = await ensureRows(page);
@@ -343,7 +343,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(filteredRows.first()).toBeVisible();
   });
 
-  test('T00000011 | HB-BANK-TXN-017: Clearing search restores full list (if present)', async ({ page }) => {
+  test('T00000011 | HB-BANK-TXN-017: Clearing search restores full list (if present) @T00000011', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     await searchInput.fill('no-such-transaction-xyz');
@@ -351,7 +351,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expectRowsOrEmpty(page);
   });
 
-  test('T00000012 | HB-BANK-TXN-018: Date range filter applies correctly (if present)', async ({ page }) => {
+  test('T00000012 | HB-BANK-TXN-018: Date range filter applies correctly (if present) @T00000012', async ({ page }) => {
     const dateFilter = await getDateFilter(page);
     if (!dateFilter) test.skip(true, 'Date filter not found.');
     await dateFilter.click();
@@ -359,7 +359,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(dateFilter).toBeVisible();
   });
 
-  test('T00000013 | HB-BANK-TXN-019: Date presets work (Today, This Month, etc.) if present', async ({ page }) => {
+  test('T00000013 | HB-BANK-TXN-019: Date presets work (Today, This Month, etc.) if present @T00000013', async ({ page }) => {
     const dateFilter = await getDateFilter(page);
     if (!dateFilter) test.skip(true, 'Date filter not found.');
     await dateFilter.click().catch(() => {});
@@ -372,7 +372,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(preset).toBeVisible();
   });
 
-  test('T00000014 | HB-BANK-TXN-020: Account filter limits transactions to selected bank account (if present)', async ({ page }) => {
+  test('T00000014 | HB-BANK-TXN-020: Account filter limits transactions to selected bank account (if present) @T00000014', async ({ page }) => {
     const accountFilter = await getAccountFilter(page);
     if (!accountFilter) test.skip(true, 'Account filter not found.');
     await accountFilter.click().catch(() => {});
@@ -382,7 +382,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(accountFilter).toBeVisible();
   });
 
-  test('T00000015 | HB-BANK-TXN-021: Status filter shows pending/posted/reconciled (if present)', async ({ page }) => {
+  test('T00000015 | HB-BANK-TXN-021: Status filter shows pending/posted/reconciled (if present) @T00000015', async ({ page }) => {
     const statusFilter = await getStatusFilter(page);
     if (!statusFilter) test.skip(true, 'Status filter not found.');
     await statusFilter.click().catch(() => {});
@@ -392,7 +392,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(statusFilter).toBeVisible();
   });
 
-  test('T00000016 | HB-BANK-TXN-022: Amount range filter restricts results (if present)', async ({ page }) => {
+  test('T00000016 | HB-BANK-TXN-022: Amount range filter restricts results (if present) @T00000016', async ({ page }) => {
     const amountFilter = await getAmountFilter(page);
     if (!amountFilter) test.skip(true, 'Amount filter not found.');
     await amountFilter.fill('1');
@@ -400,14 +400,14 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(amountFilter).toHaveValue(/1/);
   });
 
-  test('T00000017 | HB-BANK-TXN-023: Clear all filters resets to default state (if present)', async ({ page }) => {
+  test('T00000017 | HB-BANK-TXN-023: Clear all filters resets to default state (if present) @T00000017', async ({ page }) => {
     const clear = await getClearFilters(page);
     if (!clear) test.skip(true, 'Clear filters control not found.');
     await clear.click();
     await expect(clear).toBeVisible();
   });
 
-  test('T00000018 | HB-BANK-TXN-024: Transaction details open on row click (if present)', async ({ page }) => {
+  test('T00000018 | HB-BANK-TXN-024: Transaction details open on row click (if present) @T00000018', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -419,7 +419,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(details).toBeVisible();
   });
 
-  test('T00000019 | HB-BANK-TXN-025: Transaction details show full metadata (if present)', async ({ page }) => {
+  test('T00000019 | HB-BANK-TXN-025: Transaction details show full metadata (if present) @T00000019', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -431,7 +431,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(details).toBeVisible();
   });
 
-  test('T0000001a | HB-BANK-TXN-026: Back navigation returns to list state', async ({ page }) => {
+  test('T0000001a | HB-BANK-TXN-026: Back navigation returns to list state @T0000001a', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -441,7 +441,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(rowsAfter.first()).toBeVisible();
   });
 
-  test('T0000001b | HB-BANK-TXN-027: Export transactions to CSV (if present)', async ({ page }) => {
+  test('T0000001b | HB-BANK-TXN-027: Export transactions to CSV (if present) @T0000001b', async ({ page }) => {
     const exportButton = await firstVisibleLocator([
       page.getByRole('button', { name: /export|download/i }),
       page.locator('button:has-text("Export"), button:has-text("Download")').first(),
@@ -454,7 +454,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(await download.suggestedFilename()).toMatch(/\.csv$/i);
   });
 
-  test('T0000001c | HB-BANK-TXN-028: Export respects active filters (if present)', async ({ page }) => {
+  test('T0000001c | HB-BANK-TXN-028: Export respects active filters (if present) @T0000001c', async ({ page }) => {
     const exportButton = await firstVisibleLocator([
       page.getByRole('button', { name: /export|download/i }),
       page.locator('button:has-text("Export"), button:has-text("Download")').first(),
@@ -469,7 +469,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(await download.suggestedFilename()).toMatch(/\.csv$/i);
   });
 
-  test('T0000001d | HB-BANK-TXN-029: Print view renders correctly (if present)', async ({ page }) => {
+  test('T0000001d | HB-BANK-TXN-029: Print view renders correctly (if present) @T0000001d', async ({ page }) => {
     const printButton = await firstVisibleLocator([
       page.getByRole('button', { name: /print/i }),
       page.locator('button:has-text("Print")').first(),
@@ -479,7 +479,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(printButton).toBeVisible();
   });
 
-  test('T0000001e | HB-BANK-TXN-030: Bulk select transactions (if present)', async ({ page }) => {
+  test('T0000001e | HB-BANK-TXN-030: Bulk select transactions (if present) @T0000001e', async ({ page }) => {
     const checkbox = page.locator('input[type="checkbox"]').first();
     if (!(await checkbox.isVisible().catch(() => false))) test.skip(true, 'Row selection checkbox not found.');
     await checkbox.check().catch(async () => {
@@ -488,7 +488,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(checkbox).toBeChecked();
   });
 
-  test('T0000001f | HB-BANK-TXN-031: Bulk categorize transactions (if present)', async ({ page }) => {
+  test('T0000001f | HB-BANK-TXN-031: Bulk categorize transactions (if present) @T0000001f', async ({ page }) => {
     const checkbox = page.locator('input[type="checkbox"]').first();
     if (!(await checkbox.isVisible().catch(() => false))) test.skip(true, 'Row selection checkbox not found.');
     await checkbox.check().catch(async () => {
@@ -503,7 +503,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(bulkAction).toBeVisible();
   });
 
-  test('T00000020 | HB-BANK-TXN-032: Mark transaction as reconciled (if present)', async ({ page }) => {
+  test('T00000020 | HB-BANK-TXN-032: Mark transaction as reconciled (if present) @T00000020', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -516,7 +516,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(reconcile).toBeVisible();
   });
 
-  test('T00000021 | HB-BANK-TXN-033: Undo reconcile (if present)', async ({ page }) => {
+  test('T00000021 | HB-BANK-TXN-033: Undo reconcile (if present) @T00000021', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -529,7 +529,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(undo).toBeVisible();
   });
 
-  test('T00000022 | HB-BANK-TXN-034: Attach receipt to transaction (if present)', async ({ page }) => {
+  test('T00000022 | HB-BANK-TXN-034: Attach receipt to transaction (if present) @T00000022', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -543,7 +543,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(fileInput).toBeVisible();
   });
 
-  test('T00000023 | HB-BANK-TXN-035: Remove attachment from transaction (if present)', async ({ page }) => {
+  test('T00000023 | HB-BANK-TXN-035: Remove attachment from transaction (if present) @T00000023', async ({ page }) => {
     const remove = await firstVisibleLocator([
       page.getByRole('button', { name: /remove attachment|delete attachment/i }),
       page.locator('button:has-text("Remove"), button:has-text("Delete")').first(),
@@ -553,7 +553,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(remove).toBeVisible();
   });
 
-  test('T00000024 | HB-BANK-TXN-036: Split transaction into multiple categories (if present)', async ({ page }) => {
+  test('T00000024 | HB-BANK-TXN-036: Split transaction into multiple categories (if present) @T00000024', async ({ page }) => {
     const split = await firstVisibleLocator([
       page.getByRole('button', { name: /split/i }),
       page.locator('button:has-text("Split")').first(),
@@ -563,7 +563,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(split).toBeVisible();
   });
 
-  test('T00000025 | HB-BANK-TXN-037: Split validation prevents total mismatch (if present)', async ({ page }) => {
+  test('T00000025 | HB-BANK-TXN-037: Split validation prevents total mismatch (if present) @T00000025', async ({ page }) => {
     const split = await firstVisibleLocator([
       page.getByRole('button', { name: /split/i }),
       page.locator('button:has-text("Split")').first(),
@@ -575,7 +575,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(error).toBeVisible();
   });
 
-  test('T00000026 | HB-BANK-TXN-038: Edit transaction memo/notes (if present)', async ({ page }) => {
+  test('T00000026 | HB-BANK-TXN-038: Edit transaction memo/notes (if present) @T00000026', async ({ page }) => {
     const memo = await firstVisibleLocator([
       page.getByLabel(/memo|notes/i),
       page.locator('textarea[name*="memo" i], textarea[name*="note" i]').first(),
@@ -585,7 +585,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(memo).toHaveValue(/Automation memo/);
   });
 
-  test('T00000027 | HB-BANK-TXN-039: Vendor/payee assignment (if present)', async ({ page }) => {
+  test('T00000027 | HB-BANK-TXN-039: Vendor/payee assignment (if present) @T00000027', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await rows.first().click();
@@ -606,7 +606,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(payee).toBeVisible();
   });
 
-  test('T00000028 | HB-BANK-TXN-040: Category assignment (if present)', async ({ page }) => {
+  test('T00000028 | HB-BANK-TXN-040: Category assignment (if present) @T00000028', async ({ page }) => {
     const category = await firstVisibleLocator([
       page.getByRole('combobox', { name: /category/i }),
       page.getByLabel(/category/i),
@@ -619,7 +619,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(category).toBeVisible();
   });
 
-  test('T00000029 | HB-BANK-TXN-041: Reject invalid amount edits (if editable)', async ({ page }) => {
+  test('T00000029 | HB-BANK-TXN-041: Reject invalid amount edits (if editable) @T00000029', async ({ page }) => {
     const amount = await firstVisibleLocator([
       page.getByLabel(/amount/i),
       page.locator('input[name*="amount" i]').first(),
@@ -631,7 +631,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(error).toBeVisible();
   });
 
-  test('T0000002a | HB-BANK-TXN-042: Filter state is reflected in URL (if supported)', async ({ page }) => {
+  test('T0000002a | HB-BANK-TXN-042: Filter state is reflected in URL (if supported) @T0000002a', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     await searchInput.fill('test');
@@ -640,7 +640,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(url).toMatch(/search|filter|query/i);
   });
 
-  test('T0000002b | HB-BANK-TXN-043: Refresh retains filters (if supported)', async ({ page }) => {
+  test('T0000002b | HB-BANK-TXN-043: Refresh retains filters (if supported) @T0000002b', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     await searchInput.fill('test');
@@ -650,19 +650,19 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(value).toContain('test');
   });
 
-  test('T0000002c | HB-BANK-TXN-044: Column resize or reorder works (if supported)', async ({ page }) => {
+  test('T0000002c | HB-BANK-TXN-044: Column resize or reorder works (if supported) @T0000002c', async ({ page }) => {
     const header = page.locator('th').first();
     if (!(await header.isVisible().catch(() => false))) test.skip(true, 'No column headers found.');
     await expect(header).toBeVisible();
   });
 
-  test('T0000002d | HB-BANK-TXN-045: Totals/summary bar matches visible results (if present)', async ({ page }) => {
+  test('T0000002d | HB-BANK-TXN-045: Totals/summary bar matches visible results (if present) @T0000002d', async ({ page }) => {
     const summary = page.locator('text=/total|summary|balance/i').first();
     if (!(await summary.isVisible().catch(() => false))) test.skip(true, 'Summary bar not found.');
     await expect(summary).toBeVisible();
   });
 
-  test('T0000002e | HB-BANK-TXN-046: Unauthorized API error shows friendly message (if simulated)', async ({ page }) => {
+  test('T0000002e | HB-BANK-TXN-046: Unauthorized API error shows friendly message (if simulated) @T0000002e', async ({ page }) => {
     await page.route('**/*', (route) => {
       if (route.request().resourceType() === 'xhr' || route.request().resourceType() === 'fetch') {
         route.fulfill({ status: 401, body: 'Unauthorized' });
@@ -676,7 +676,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(error).toBeVisible();
   });
 
-  test('T0000002f | HB-BANK-TXN-047: API error shows retry option (if present)', async ({ page }) => {
+  test('T0000002f | HB-BANK-TXN-047: API error shows retry option (if present) @T0000002f', async ({ page }) => {
     await page.route('**/*', (route) => {
       if (route.request().resourceType() === 'xhr' || route.request().resourceType() === 'fetch') {
         route.fulfill({ status: 500, body: 'Server error' });
@@ -693,13 +693,13 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(retry).toBeVisible();
   });
 
-  test('T00000030 | HB-BANK-TXN-048: Keyboard navigation through list rows', async ({ page }) => {
+  test('T00000030 | HB-BANK-TXN-048: Keyboard navigation through list rows @T00000030', async ({ page }) => {
     await page.keyboard.press('Tab');
     const activeTag = await page.evaluate(() => document.activeElement?.tagName.toLowerCase());
     expect(['input', 'button', 'select', 'textarea', 'a']).toContain(activeTag);
   });
 
-  test('T00000031 | HB-BANK-TXN-049: Screen reader labels for filters (if present)', async ({ page }) => {
+  test('T00000031 | HB-BANK-TXN-049: Screen reader labels for filters (if present) @T00000031', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     const aria = await searchInput.getAttribute('aria-label');
@@ -707,7 +707,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(Boolean(aria || placeholder)).toBeTruthy();
   });
 
-  test('T00000032 | HB-BANK-TXN-050: High-contrast focus indicator on actionable controls', async ({ page }) => {
+  test('T00000032 | HB-BANK-TXN-050: High-contrast focus indicator on actionable controls @T00000032', async ({ page }) => {
     await page.keyboard.press('Tab');
     const outline = await page.evaluate(() => {
       const el = document.activeElement;
@@ -717,45 +717,45 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(outline).not.toEqual('none');
   });
 
-  test('T00000033 | HB-BANK-TXN-051: Mobile layout remains usable (375x812)', async ({ page }) => {
+  test('T00000033 | HB-BANK-TXN-051: Mobile layout remains usable (375x812) @T00000033', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto(transactionsUrl);
     await expectRowsOrEmpty(page);
   });
 
-  test('T00000034 | HB-BANK-TXN-052: Tablet layout remains usable (768x1024)', async ({ page }) => {
+  test('T00000034 | HB-BANK-TXN-052: Tablet layout remains usable (768x1024) @T00000034', async ({ page }) => {
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto(transactionsUrl);
     await expectRowsOrEmpty(page);
   });
 
-  test('T00000035 | HB-BANK-TXN-053: Large list scroll performance is acceptable', async ({ page }) => {
+  test('T00000035 | HB-BANK-TXN-053: Large list scroll performance is acceptable @T00000035', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     await page.mouse.wheel(0, 1200);
     await expect(rows.first()).toBeVisible();
   });
 
-  test('T00000036 | HB-BANK-TXN-054: Duplicate transaction detection message (if supported)', async ({ page }) => {
+  test('T00000036 | HB-BANK-TXN-054: Duplicate transaction detection message (if supported) @T00000036', async ({ page }) => {
     const duplicate = page.locator('text=/duplicate/i').first();
     if (!(await duplicate.isVisible().catch(() => false))) test.skip(true, 'Duplicate indicators not found.');
     await expect(duplicate).toBeVisible();
   });
 
-  test('T00000037 | HB-BANK-TXN-055: Transactions show correct timezone for timestamps', async ({ page }) => {
+  test('T00000037 | HB-BANK-TXN-055: Transactions show correct timezone for timestamps @T00000037', async ({ page }) => {
     const rows = await ensureRows(page);
     if (!rows) test.skip(true, 'No rows found.');
     const rowText = await rows.first().innerText();
     expect(rowText.length).toBeGreaterThan(0);
   });
 
-  test('T00000038 | HB-BANK-TXN-056: Multi-account view shows account name (if supported)', async ({ page }) => {
+  test('T00000038 | HB-BANK-TXN-056: Multi-account view shows account name (if supported) @T00000038', async ({ page }) => {
     const accountLabel = page.locator('text=/account/i').first();
     if (!(await accountLabel.isVisible().catch(() => false))) test.skip(true, 'Account label not found.');
     await expect(accountLabel).toBeVisible();
   });
 
-  test('T00000039 | HB-BANK-TXN-057: Amount filter rejects non-numeric input (if present)', async ({ page }) => {
+  test('T00000039 | HB-BANK-TXN-057: Amount filter rejects non-numeric input (if present) @T00000039', async ({ page }) => {
     const amountFilter = await getAmountFilter(page);
     if (!amountFilter) test.skip(true, 'Amount filter not found.');
     await amountFilter.fill('abc');
@@ -764,7 +764,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(error).toBeVisible();
   });
 
-  test('T0000003a | HB-BANK-TXN-058: Search handles special characters safely', async ({ page }) => {
+  test('T0000003a | HB-BANK-TXN-058: Search handles special characters safely @T0000003a', async ({ page }) => {
     const searchInput = await getSearchInput(page);
     if (!searchInput) test.skip(true, 'Search input not found.');
     await searchInput.fill("' OR 1=1 --");
@@ -773,7 +773,7 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     await expect(searchInput).toBeVisible();
   });
 
-  test('T0000003b | HB-BANK-TXN-059: Transaction row selection does not trigger unintended navigation', async ({ page }) => {
+  test('T0000003b | HB-BANK-TXN-059: Transaction row selection does not trigger unintended navigation @T0000003b', async ({ page }) => {
     const checkbox = page.locator('input[type="checkbox"]').first();
     if (!(await checkbox.isVisible().catch(() => false))) test.skip(true, 'Row selection checkbox not found.');
     const urlBefore = page.url();
@@ -781,13 +781,13 @@ test.describe('Banking Transactions - manual cases to automation', () => {
     expect(page.url()).toEqual(urlBefore);
   });
 
-  test('T0000003c | HB-BANK-TXN-060: Transactions page supports refresh without losing session', async ({ page }) => {
+  test('T0000003c | HB-BANK-TXN-060: Transactions page supports refresh without losing session @T0000003c', async ({ page }) => {
     await page.reload();
     await expect(page).toHaveURL(/tab=transactions/);
   });
 });
 
-test('T30a45af5 | HB-BANK-TXN-003: Access control blocks users without banking permissions', async ({ page }) => {
+test('T30a45af5 | HB-BANK-TXN-003: Access control blocks users without banking permissions @T30a45af5', async ({ page }) => {
   test.skip(true, 'Restricted-role credentials not provided.');
   await page.goto(transactionsUrl);
 });

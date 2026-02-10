@@ -1,8 +1,42 @@
 import { test, expect } from '@playwright/test';
 import type { Page, TestInfo } from '@playwright/test';
-import { login as seedLogin } from '../utils/login';
 
-test.setTimeout(0); // No timeout - tests can run indefinitely
+test.setTimeout(300000); // 5 minutes timeout
+
+// ================================
+// ✅ INLINE LOGIN (NO EXTERNAL IMPORTS)
+// Self-contained login for Jenkins/Testomat.io compatibility
+// ================================
+const seedCredentials = {
+  email: 'fapopi7433@feanzier.com',
+  password: 'Kapil08dangar@'
+};
+
+async function seedLogin(page: Page) {
+  await page.goto('/login');
+  
+  const emailField = page.locator(
+    'input[name="email"], input[type="email"], input[placeholder*="Email" i], input[aria-label*="Email" i]'
+  );
+  await emailField.first().waitFor({ state: 'visible', timeout: 60000 });
+  await emailField.first().fill(seedCredentials.email);
+  
+  const passwordField = page.locator(
+    'input[name="password"], input[type="password"], input[placeholder*="Password" i], input[aria-label*="Password" i]'
+  );
+  await passwordField.first().waitFor({ state: 'visible', timeout: 60000 });
+  await passwordField.first().fill(seedCredentials.password);
+  
+  const submitButton = page.locator(
+    'button[type="submit"], button:has-text("Login"), button:has-text("Sign in"), button:has-text("Log in")'
+  );
+  await submitButton.first().waitFor({ state: 'visible', timeout: 30000 });
+  await submitButton.first().click();
+  
+  await page.waitForLoadState('domcontentloaded');
+  await page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 60000 });
+}
+// ================================
 
 const invoicesUrl = '/sales/invoices';
 const customersNewUrl = '/sales/customers/new';

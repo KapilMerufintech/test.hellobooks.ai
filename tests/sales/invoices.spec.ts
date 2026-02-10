@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 import type { Page, TestInfo } from '@playwright/test';
 
-test.setTimeout(300000); // 5 minutes timeout
-
 // ================================
 // ✅ INLINE LOGIN (NO EXTERNAL IMPORTS)
 // Self-contained login for Jenkins/Testomat.io compatibility
@@ -201,11 +199,13 @@ async function expectStatus(page: Page, status: RegExp) {
 
 test.describe('@sales Sales / Invoices @S64c1475f', () => {
   test('@Td4d74412 @invoice HB-INVOICE-001: Open invoices list after login', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     await seedLogin(page);
     await openInvoices(page);
   });
 
   test('@T549282c6 @invoice HB-INVOICE-002: Create draft invoice with required fields', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info()); // Stable seed tied to test id.
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -219,6 +219,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T5b70e5f0 @invoice HB-INVOICE-003: Validate required customer on invoice', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     await seedLogin(page);
     await openInvoices(page);
     await startNewInvoice(page);
@@ -228,6 +229,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T1aef6915 @invoice HB-INVOICE-004: Validate required line items on invoice', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -239,6 +241,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@Tad077794 @invoice HB-INVOICE-005: Line item totals calculate correctly', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -250,6 +253,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T28a11cf0 @invoice HB-INVOICE-006: Invoice subtotal equals sum of line totals', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -263,6 +267,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@Teb2003dc @invoice HB-INVOICE-007: Percentage discount reduces line total', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -279,6 +284,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T128751dc @invoice HB-INVOICE-008: Fixed discount reduces invoice subtotal', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -295,6 +301,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T3f9b2a51 @invoice HB-INVOICE-009: Tax exclusive calculation', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -319,6 +326,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T7a4e3c82 @invoice HB-INVOICE-010: Tax inclusive calculation', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -336,6 +344,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T9c1d5b73 @invoice HB-INVOICE-011: Multiple tax rates per line', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -351,6 +360,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T2e8f6a94 @invoice HB-INVOICE-012: Zero-rated tax item', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -373,6 +383,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T4b9c7d15 @invoice HB-INVOICE-013: Non-taxable item does not add tax', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -394,6 +405,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T6d1e8f26 @invoice HB-INVOICE-014: Invoice numbering sequence increments', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -425,6 +437,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T8f3g9h37 @invoice HB-INVOICE-015: Duplicate invoice number rejected', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -451,6 +464,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T1h4i5j48 @invoice HB-INVOICE-016: Payment terms set due date', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -478,6 +492,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T3j6k7l59 @invoice HB-INVOICE-017: Manual due date override', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -499,6 +514,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@Td872aa29 @invoice HB-INVOICE-018: Send invoice marks status as Sent', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -515,6 +531,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@T5m8n9o61 @invoice HB-INVOICE-019: Email template uses invoice variables', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);
@@ -536,6 +553,7 @@ test.describe('@sales Sales / Invoices @S64c1475f', () => {
   });
 
   test('@Tf8a72162 @invoice HB-INVOICE-020: Download invoice PDF', async ({ page }) => {
+    test.setTimeout(300000); // 5 minutes timeout for this test
     const seed = buildSeedData(test.info());
     await seedLogin(page);
     await createCustomer(page, seed);

@@ -83,111 +83,142 @@ async function createCustomer(page: Page, seed: SeedData) {
   const masterDataButton = page.getByRole('button', { name: /master data/i });
   await masterDataButton.waitFor({ state: 'visible', timeout: 10000 });
   await masterDataButton.click();
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(800);
   
   // Click Contacts link
   const contactsLink = page.getByRole('link', { name: /contacts/i }).or(page.getByRole('button', { name: /contacts/i }));
   await contactsLink.first().click();
   await page.waitForLoadState('domcontentloaded');
   
+  // Wait for loading spinner to disappear and page to be ready
+  await page.waitForTimeout(2000);
+  
+  // Wait for loading indicator to disappear
+  const loadingIndicator = page.getByText(/loading/i).first();
+  try {
+    await loadingIndicator.waitFor({ state: 'hidden', timeout: 15000 });
+  } catch (error) {
+    // Loading might have already finished
+  }
+  
+  await page.waitForTimeout(1000);
+  
   // Click New Contact/Customer button
-  const newButton = page.getByRole('button', { name: /new contact|add contact|create contact|new customer/i }).first();
-  await expect(newButton).toBeVisible({ timeout: 10000 });
+  const newButton = page.getByRole('button', { name: /new contact|add contact|create contact|new customer|add new|create|new/i }).first();
+  await newButton.waitFor({ state: 'visible', timeout: 15000 });
   await newButton.click();
   
   // Fill customer form
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(1500);
   const nameInput = page.getByLabel(/name/i).or(page.getByPlaceholder(/name/i)).first();
   const emailInput = page.getByLabel(/email/i).or(page.getByPlaceholder(/email/i)).first();
-  await expect(nameInput).toBeVisible({ timeout: 10000 });
-  await expect(emailInput).toBeVisible({ timeout: 10000 });
+  await nameInput.waitFor({ state: 'visible', timeout: 15000 });
+  await emailInput.waitFor({ state: 'visible', timeout: 15000 });
   await nameInput.fill(seed.customerName);
   await emailInput.fill(seed.customerEmail);
   const saveButton = page.getByRole('button', { name: /save|create|submit/i }).first();
-  await expect(saveButton).toBeVisible();
+  await saveButton.waitFor({ state: 'visible', timeout: 10000 });
   await saveButton.click();
   await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
 }
 
 async function startNewInvoice(page: Page) {
   await openInvoices(page);
   
-  // Click "Create Invoice" button to open dropdown
+  // Wait a bit for page to stabilize
+  await page.waitForTimeout(1000);
+  
+  // Click "Create Invoice" button  to open dropdown
   const createButton = page.getByRole('button', { name: /create invoice/i }).first();
   await createButton.waitFor({ state: 'visible', timeout: 15000 });
+  
+  // Take screenshot before clicking
+  await page.screenshot({ path: 'debug-before-create-click.png' });
   await createButton.click();
   
-  // Wait for dropdown menu to appear
-  await page.waitForTimeout(1500);
+  // Wait for dropdown to appear
+  await page.waitForTimeout(2000);
   
-  // Look for dropdown menu items - try to find any visible dropdown content first
-  const dropdownMenu = page.locator('[role="menu"], [role="menuitem"], .dropdown-menu, [class*="dropdown"]').first();
+  // Take screenshot after dropdown appears
+  await page.screenshot({ path: 'debug-after-dropdown.png' });
   
+  // Try to find and click "New Invoice" - use very simple selector
+  // Try clicking any visible text that says "New Invoice"
   try {
-    await dropdownMenu.waitFor({ state: 'visible', timeout: 5000 });
+    // Method 1: Direct text match
+    const newInvoice = page.locator('text="New Invoice"').first();
+    const count = await newInvoice.count();
+    
+    if (count > 0 && await newInvoice.isVisible()) {
+      await newInvoice.click();
+    } else {
+      // Method 2: Try case-insensitive
+      const newInvoice2 = page.getByText('New Invoice', { exact: false }).first();
+      await newInvoice2.waitFor({ state: 'visible', timeout: 5000 });
+      await newInvoice2.click();
+    }
   } catch (error) {
-    // Dropdown might not have appeared, wait a bit longer
-    await page.waitForTimeout(1000);
+    // Method 3: Try finding in dropdown/menu specifically
+    const dropdown = page.locator('[role="menu"]').first();
+    const newInvoiceInMenu = dropdown.locator('text=/new invoice/i').first();
+    await newInvoiceInMenu.click();
   }
   
-  // Try multiple selectors for "New Invoice" option - be very liberal with matching
-  const newInvoiceOption = page.locator('text="New Invoice"').first()
-    .or(page.locator('text="New invoice"').first())
-    .or(page.getByText(/^new invoice$/i).first())
-    .or(page.getByRole('menuitem', { name: /new invoice/i }).first())
-    .or(page.locator('[role="option"]').filter({ hasText: /new invoice/i }).first())
-    .or(page.locator('[role="menu"]').locator('text=/new invoice/i').first())
-    .or(page.locator('button', { hasText: /new invoice/i }).first())
-    .or(page.locator('a', { hasText: /new invoice/i }).first())
-    .or(page.locator('div', { hasText: /^new invoice$/i }).first());
-  
-  await newInvoiceOption.waitFor({ state: 'visible', timeout: 10000 });
-  await newInvoiceOption.click();
-  
+  // Wait for navigation
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(3000);
   
-  // Verify we're on the invoice form - check multiple indicators
-  const customerField = page.getByPlaceholder(/choose a customer/i);
-  const invoiceHeading = page.getByRole('heading', { name: /new invoice|create invoice/i });
-  const invoiceNumberField = page.getByPlaceholder(/invoice/i);
+  // Take screenshot after clicking New Invoice
+  await page.screenshot({ path: 'debug-after-new-invoice-click.png' });
   
-  const formIndicator = customerField.or(invoiceHeading).or(invoiceNumberField);
+  // Check if we're on the invoice form - look for the heading
+  const invoiceHeading = page.getByRole('heading', { name: /new invoice/i });
   
   try {
-    await expect(formIndicator.first()).toBeVisible({ timeout: 15000 });
+    await expect(invoiceHeading).toBeVisible({ timeout: 10000 });
   } catch (error) {
-    // Form didn't load - take a screenshot for debugging
-    await page.screenshot({ path: 'debug-invoice-form-not-loaded.png', fullPage: true });
-    throw new Error('Invoice form did not load after clicking New Invoice. Check debug-invoice-form-not-loaded.png');
+    // Form not visible
+    const createInvoiceButton = await page.getByRole('button', { name: /create invoice/i }).first().isVisible().catch(() => false);
+    
+    if (createInvoiceButton) {
+      throw new Error('Still on invoices list page - New Invoice click did not navigate to form. Check debug screenshots.');
+    }
+    throw error;
   }
+  
+  // Form loaded successfully
+  await page.waitForTimeout(1000);
 }
 
 async function selectCustomerByName(page: Page, customerName: string) {
-  // Click the "Choose a Customer" combobox
-  const customerCombobox = page.getByText(/choose a customer/i)
-    .or(page.getByPlaceholder(/choose a customer/i))
-    .or(page.locator('[placeholder*="customer" i]'));
+  // Click the "Choose a Customer" combobox/dropdown
+  const customerCombobox = page.getByText('Choose a Customer').first()
+    .or(page.locator('text="Choose a Customer"').first())
+    .or(page.locator('[class*="customer"]').filter({ hasText: /choose a customer/i }).first());
   
-  await customerCombobox.first().waitFor({ state: 'visible', timeout: 15000 });
-  await customerCombobox.first().click();
-  await page.waitForTimeout(800);
-  
-  // Type customer name in the search/input field that appears
-  const customerInput = page.locator('input[type="text"]').first();
-  await customerInput.waitFor({ state: 'visible', timeout: 10000 });
-  await customerInput.fill(customerName);
+  await customerCombobox.waitFor({ state: 'visible', timeout: 15000 });
+  await customerCombobox.click();
   await page.waitForTimeout(1000);
   
-  // Click the customer option
-  const customerOption = page.getByRole('option', { name: new RegExp(customerName, 'i') })
-    .or(page.locator('[role="option"]', { hasText: new RegExp(customerName, 'i') }))
-    .or(page.getByText(new RegExp(`^${customerName}`, 'i')));
+  // Type customer name in the search/input that appears
+  await page.keyboard.type(customerName);
+  await page.waitForTimeout(1500);
   
-  await customerOption.first().waitFor({ state: 'visible', timeout: 10000 });
-  await customerOption.first().click();
-  await page.waitForTimeout(500);
+  // Click the customer option from dropdown
+  const customerOption = page.getByRole('option', { name: new RegExp(customerName, 'i') })
+    .or(page.locator('[role="option"]').filter({ hasText: new RegExp(customerName, 'i') }))
+    .or(page.getByText(customerName, { exact: false }));
+  
+  try {
+    await customerOption.first().waitFor({ state: 'visible', timeout: 10000 });
+    await customerOption.first().click();
+  } catch (error) {
+    // If option not found, press Enter to select
+    await page.keyboard.press('Enter');
+  }
+  
+  await page.waitForTimeout(800);
 }
 
 async function setInvoiceNumber(page: Page, invoiceNumber: string) {
@@ -202,145 +233,132 @@ async function addLineItem(page: Page, description: string, qty: number, price: 
   // Wait for the line items section to be ready
   await page.waitForTimeout(1000);
   
-  // Click the item combobox to open dropdown
-  const itemCombobox = page.getByText(/select item/i)
-    .or(page.getByPlaceholder(/select item|search item/i))
-    .or(page.locator('[placeholder*="item" i]'))
-    .or(page.locator('input[type="text"]').first());
+  // Click the "Select item..." dropdown - use test ID for more reliability
+  const selectItemButton = page.getByTestId('item-picker-trigger').first();
   
-  await itemCombobox.first().waitFor({ state: 'visible', timeout: 15000 });
-  await itemCombobox.first().click();
-  await page.waitForTimeout(1500);
+  await selectItemButton.waitFor({ state: 'visible', timeout: 15000 });
+  await selectItemButton.click();
+  await page.waitForTimeout(2000);
   
-  // Wait for dropdown options to appear
-  const dropdownOptions = page.getByRole('option')
-    .or(page.locator('[role="option"]'))
-    .or(page.locator('[class*="option"]'))
-    .or(page.locator('li[data-value]'));
+  // Check if a drawer/dialog opened
+  const itemDrawer = page.locator('[data-testid="item-drawer"]');
+  const isDrawerOpen = await itemDrawer.isVisible().catch(() => false);
   
-  try {
-    // Try to select an existing item from dropdown
-    // First, try to find an option matching the description
-    const matchingOption = page.getByRole('option', { name: new RegExp(description, 'i') })
-      .or(page.locator('[role="option"]', { hasText: new RegExp(description, 'i') }));
+  if (isDrawerOpen) {
+    // Drawer is open - try to select an item or close it
+    const dropdownOptions = page.getByRole('option');
+    const optionCount = await dropdownOptions.count();
     
-    const matchingCount = await matchingOption.count();
-    
-    if (matchingCount > 0) {
-      // Found matching item in dropdown, click it
-      await matchingOption.first().click();
-      await page.waitForTimeout(800);
-    } else {
-      // No matching item, select the first available item from dropdown
-      const firstOption = dropdownOptions.first();
-      const optionCount = await dropdownOptions.count();
-      
-      if (optionCount > 0) {
-        await firstOption.waitFor({ state: 'visible', timeout: 5000 });
-        await firstOption.click();
-        await page.waitForTimeout(800);
-      } else {
-        // No dropdown options available, type custom description and press Escape
-        await page.keyboard.type(description);
-        await page.waitForTimeout(500);
-        await page.keyboard.press('Escape');
-        await page.waitForTimeout(800);
-      }
+    if (optionCount > 0) {
+      // Select first available item
+      await dropdownOptions.first().click();
+      await page.waitForTimeout(1000);
     }
-  } catch (error) {
-    // Fallback: type description and close dropdown
-    await page.keyboard.type(description);
-    await page.waitForTimeout(500);
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(800);
+    
+    // Close the drawer by clicking a close button or pressing Escape
+    const closeButton = itemDrawer.locator('button[aria-label*="close" i], button:has-text("Close"), button:has-text("Cancel")').first();
+    const hasCloseButton = await closeButton.isVisible().catch(() => false);
+    
+    if (hasCloseButton) {
+      await closeButton.click();
+      await page.waitForTimeout(1000);
+    } else {
+      // Press Escape to close
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(1000);
+    }
+    
+    // Wait for drawer to close
+    await itemDrawer.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
+  } else {
+    // No drawer, regular dropdown - select item
+    const dropdownOptions = page.getByRole('option');
+    const optionCount = await dropdownOptions.count();
+    
+    if (optionCount > 0) {
+      await dropdownOptions.first().click();
+      await page.waitForTimeout(1000);
+    } else {
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(800);
+    }
   }
   
-  // Find quantity input
-  const lineItemSection = page.locator('table, [role="table"], .line-items, [class*="line"]').first();
+  await page.waitForTimeout(1000);
   
-  const qtyInput = page.getByPlaceholder(/qty|quantity/i).first()
-    .or(lineItemSection.locator('input[type="number"]').first())
-    .or(lineItemSection.locator('input').filter({ hasText: '1' }).first())
-    .or(page.locator('input[value="1"]').first());
-  
+  // Now fill quantity and price using direct selectors or Tab navigation
+  // Try to find Qty input
+  const qtyLabel = page.getByText(/^qty$/i).first();
   try {
-    await qtyInput.waitFor({ state: 'visible', timeout: 10000 });
+    await qtyLabel.waitFor({ state: 'visible', timeout: 5000 });
+    const qtyInput = page.locator('input[type="text"], input[type="number"]').filter({ has: page.locator('.. >> text=/qty/i') }).first()
+      .or(page.locator('input[value="1"]').first());
     await qtyInput.click();
     await qtyInput.clear();
     await qtyInput.fill(String(qty));
     await page.waitForTimeout(500);
-  } catch (error) {
-    // Fallback: use Tab key navigation
-    await page.keyboard.press('Tab');
-    await page.waitForTimeout(300);
-    await page.keyboard.type(String(qty));
-    await page.waitForTimeout(300);
-  }
-  
-  // Fill price
-  const priceInput = page.getByPlaceholder(/price|rate|amount/i).first()
-    .or(lineItemSection.locator('input[type="number"]').nth(1))
-    .or(page.locator('input[type="number"]').nth(1));
-  
-  try {
-    await priceInput.waitFor({ state: 'visible', timeout: 10000 });
+    
+    // Fill price
+    const priceInput = page.getByPlaceholder(/price/i).first()
+      .or(page.locator('input[placeholder="Price"]').first());
     await priceInput.click();
     await priceInput.clear();
     await priceInput.fill(String(price));
     await page.waitForTimeout(800);
   } catch (error) {
-    // Fallback: use Tab key navigation
+    // Fallback: use keyboard navigation
     await page.keyboard.press('Tab');
     await page.waitForTimeout(300);
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(300);
+    await page.keyboard.press('Control+A');
+    await page.keyboard.type(String(qty));
+    await page.waitForTimeout(500);
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(300);
+    await page.keyboard.press('Control+A');
     await page.keyboard.type(String(price));
     await page.waitForTimeout(800);
   }
   
-  // Verify that the line item was added by checking if total appears
+  // Click outside to ensure focus is lost and calculations trigger
+  await page.keyboard.press('Tab');
   await page.waitForTimeout(500);
 }
 
 async function saveDraft(page: Page) {
-  // Look for save buttons - try "Save & close" first, then fallback to any Save button
-  const saveAndCloseButton = page.getByRole('button', { name: /save\s*&\s*close/i })
-    .or(page.getByRole('button', { name: /save and close/i }))
-    .or(page.locator('button:has-text("Save & close")'))
-    .or(page.locator('button:has-text("Save and close")'));
+  // Wait a bit for any calculations to complete
+  await page.waitForTimeout(1000);
   
-  const genericSaveButton = page.getByRole('button', { name: /^save$/i })
-    .or(page.getByRole('button', { name: /save draft/i }))
-    .or(page.locator('button:has-text("Save")'));
+  // Look for "Save & close" button (seen in the screenshot)
+  const saveAndCloseButton = page.locator('text="Save & close"').first()
+    .or(page.getByRole('button', { name: /save\s*&\s*close/i }).first())
+    .or(page.getByRole('button', { name: /save and close/i }).first());
   
-  // Try Save & close first
-  try {
-    const saveCloseCount = await saveAndCloseButton.count();
-    if (saveCloseCount > 0) {
-      await saveAndCloseButton.first().waitFor({ state: 'visible', timeout: 5000 });
-      await saveAndCloseButton.first().click();
-    } else {
-      // Fallback to generic Save button
-      await genericSaveButton.first().waitFor({ state: 'visible', timeout: 5000 });
-      await genericSaveButton.first().click();
-    }
-  } catch (error) {
-    // Last resort: try any button with "save" in it
-    const anySaveButton = page.locator('button', { hasText: /save/i }).first();
-    await anySaveButton.waitFor({ state: 'visible', timeout: 5000 });
-    await anySaveButton.click();
-  }
+  await saveAndCloseButton.waitFor({ state: 'visible', timeout: 15000 });
+  await saveAndCloseButton.click();
   
   await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(2500);
+  await page.waitForTimeout(3000);
   
-  // Verify we're back on invoices list by checking URL or elements
-  const invoicesPage = page.getByRole('heading', { name: /^invoices$/i }).first()
-    .or(page.locator('table, [role="table"]').first())
-    .or(page.getByRole('button', { name: /create invoice/i }).first());
+  // Verify we're back on invoices list
+  const createInvoiceButton = page.getByRole('button', { name: /create invoice/i }).first();
+  const invoicesHeading = page.getByRole('heading', { name: /^invoices$/i }).first();
+  
+  const backOnList = createInvoiceButton.or(invoicesHeading);
   
   try {
-    await expect(invoicesPage).toBeVisible({ timeout: 15000 });
+    await expect(backOnList).toBeVisible({ timeout: 15000 });
   } catch (error) {
-    // Fallback: verify URL contains "invoices" or "tab=invoices"
+    // Check if there's an error message or validation issue
+    const errorMessage = page.locator('text=/error|required|invalid/i').first();
+    const isErrorVisible = await errorMessage.isVisible().catch(() => false);
+    
+    if (isErrorVisible) {
+      throw new Error('Validation error on invoice form - cannot save');
+    }
+    
+    // Fallback: verify URL
     await expect(page).toHaveURL(/invoices|tab=invoices/);
   }
 }

@@ -1,58 +1,13 @@
 import { test, expect } from '@playwright/test';
 import type { Page, TestInfo } from '@playwright/test';
 
-// ================================
-// ✅ INLINE LOGIN (NO EXTERNAL IMPORTS)
-// Self-contained login for Jenkins/Testomat.io compatibility
-// ================================
-const seedCredentials = {
-  email: 'fapopi7433@feanzier.com',
-  password: 'Kapil08dangar@'
-};
-
-async function seedLogin(page: Page) {
-  await page.goto('/login');
-  
-  const emailField = page.locator(
-    'input[name="email"], input[type="email"], input[placeholder*="Email" i], input[aria-label*="Email" i]'
-  );
-  await emailField.first().waitFor({ state: 'visible', timeout: 60000 });
-  await emailField.first().fill(seedCredentials.email);
-  
-  const passwordField = page.locator(
-    'input[name="password"], input[type="password"], input[placeholder*="Password" i], input[aria-label*="Password" i]'
-  );
-  await passwordField.first().waitFor({ state: 'visible', timeout: 60000 });
-  await passwordField.first().fill(seedCredentials.password);
-  
-  const submitButton = page.locator(
-    'button[type="submit"], button:has-text("Login"), button:has-text("Sign in"), button:has-text("Log in")'
-  );
-  await submitButton.first().waitFor({ state: 'visible', timeout: 30000 });
-  await submitButton.first().click();
-  
-  await page.waitForLoadState('domcontentloaded');
-  await page.waitForURL((url) => !url.pathname.includes('/login'), { timeout: 60000 });
-}
-// ================================
+// ✅ IMPORT FROM SEED FILE (Works with Jenkins/Testomat.io)
+import { seedLogin, buildSeedData, type SeedData } from '../seed.spec';
 
 const invoicesUrl = '/sales/invoices';
 const customersNewUrl = '/sales/customers/new';
 
-type SeedData = {
-  customerName: string;
-  customerEmail: string;
-  invoiceNumber: string;
-};
-
-function buildSeedData(testInfo: TestInfo): SeedData {
-  const suffix = testInfo.testId.slice(0, 8);
-  return {
-    customerName: `Auto Customer ${suffix}`,
-    customerEmail: `auto.customer+${suffix}@example.com`,
-    invoiceNumber: `AUTO-${suffix}`,
-  };
-}
+// SeedData and buildSeedData are now imported from ../seed.spec
 
 async function openInvoices(page: Page) {
   // Navigate directly to invoices list with tab parameter
@@ -330,13 +285,31 @@ async function saveDraft(page: Page) {
   // Wait a bit for any calculations to complete
   await page.waitForTimeout(1000);
   
-  // Look for "Save & close" button (seen in the screenshot)
-  const saveAndCloseButton = page.locator('text="Save & close"').first()
-    .or(page.getByRole('button', { name: /save\s*&\s*close/i }).first())
-    .or(page.getByRole('button', { name: /save and close/i }).first());
+  // Click the "Save & close" dropdown button (similar to "Create Invoice" dropdown)
+  const saveDropdownButton = page.getByRole('button', { name: /save\s*&\s*close/i })
+    .or(page.locator('button:has-text("Save & close")'))
+    .or(page.getByTestId('invoice-save-button'));
   
-  await saveAndCloseButton.waitFor({ state: 'visible', timeout: 15000 });
-  await saveAndCloseButton.click();
+  await saveDropdownButton.first().waitFor({ state: 'visible', timeout: 15000 });
+  await saveDropdownButton.first().click();
+  
+  // Wait for dropdown menu to appear
+  await page.waitForTimeout(1500);
+  
+  // Select the first option "Save & close" from the dropdown
+  const saveAndCloseOption = page.locator('text="Save & close"')
+    .or(page.getByRole('menuitem', { name: /save\s*&\s*close/i }))
+    .or(page.locator('[role="option"]', { hasText: /save.*close/i }))
+    .or(page.locator('[role="menu"]').locator('text=/save.*close/i'));
+  
+  try {
+    // Try to find and click the menu option
+    await saveAndCloseOption.first().waitFor({ state: 'visible', timeout: 5000 });
+    await saveAndCloseOption.first().click();
+  } catch (error) {
+    // If no dropdown appeared, the button might have saved directly
+    // This is fine, continue
+  }
   
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(3000);

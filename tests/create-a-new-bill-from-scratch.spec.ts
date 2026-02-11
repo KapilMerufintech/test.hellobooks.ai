@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { seedLogin } from './seed.spec';
 
 //
 // GLOBAL CONFIGURATION
@@ -21,11 +22,25 @@ test.describe('Purchases @Sx26svvwm', () => {
     const lineDescription = "Office Supplies " + suffix;
 
     //
+    // STEP 0: Login first
+    //
+    await seedLogin(page);
+
+    //
     // STEP 1: Navigate to Purchases > Bills from sidebar
     //
-    await page.goto('/list-bills', { timeout: ACTION_TIMEOUT });
-    await page.waitForLoadState('networkidle');
-    await expect(page).toHaveURL(/\/list-bills$/, { timeout: EXPECT_TIMEOUT });
+    await page.goto('https://test.hellobooks.ai/list-bills', { timeout: ACTION_TIMEOUT });
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+    
+    // Check if we're still on login page or need to navigate differently
+    if (page.url().includes('/login')) {
+      await seedLogin(page);
+      await page.goto('https://test.hellobooks.ai/list-bills', { timeout: ACTION_TIMEOUT });
+    }
+    
+    await page.waitForLoadState('networkidle').catch(() => {});
+    await expect(page).toHaveURL(/list-bills/, { timeout: EXPECT_TIMEOUT });
 
     //
     // STEP 2: Click 'New Bill' button

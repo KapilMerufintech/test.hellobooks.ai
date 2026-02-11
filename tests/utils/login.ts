@@ -1,4 +1,4 @@
-import { seedCredentials } from '../seed.data';
+import { seedCredentials } from '../seed.spec';
 
 export async function login(page, credentials = seedCredentials) {
   await page.goto('/login');

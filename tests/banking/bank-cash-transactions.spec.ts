@@ -43,14 +43,14 @@ async function waitForPageReady(page: Page) {
   await header.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
 }
 
-test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => {
-  test('[T4b5ebfda] @banking HB-BANK-TX-001: Open Transactions via deep link', async ({ page }) => {
+test.describe('@accounting Banking / Bank & Cash / Transactions @S2f9a8e21', () => {
+  test('@accounting HB-BANK-TX-001: Open Transactions via deep link @T4b5ebfda', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await expect(page).toHaveURL(/tab=transactions/i);
   });
 
-  test('[Tfeb3bf12] @banking HB-BANK-TX-002: Account selector shows balance text', async ({ page }) => {
+  test('@accounting HB-BANK-TX-002: Account selector shows balance text @Tfeb3bf12', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const accountSelector = page.getByRole('button', { name: /ucic/i }).first();
@@ -60,7 +60,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     }, 'Account selector not detected.');
   });
 
-  test('[T476b046c] @banking HB-BANK-TX-003: Tabs for Draft, Confirmed, Reconciliation are visible', async ({ page }) => {
+  test('@accounting HB-BANK-TX-003: Tabs for Draft, Confirmed, Reconciliation are visible @T476b046c', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const draftTab = page.locator('[role="tab"], button, a').filter({ hasText: /draft transactions/i }).first();
@@ -71,7 +71,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     await expect(reconciliationTab).toBeVisible();
   });
 
-  test('[T0d495f44] @banking HB-BANK-TX-004: Confirmed tab loads list after delay', async ({ page }) => {
+  test('@accounting HB-BANK-TX-004: Confirmed tab loads list after delay @T0d495f44', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const confirmedTab = page.getByRole('tab', { name: /confirmed/i });
@@ -80,7 +80,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     await expect(confirmedTab).toHaveAttribute('aria-selected', /true/i);
   });
 
-  test('[Tbf4908a9] @banking HB-BANK-TX-005: Search, Person, Filter, Hide controls are available', async ({ page }) => {
+  test('@accounting HB-BANK-TX-005: Search, Person, Filter, Hide controls are available @Tbf4908a9', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await expect(page.locator('input[placeholder="Search" i]')).toBeVisible();
@@ -89,7 +89,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     await expect(page.locator('button, [role="button"]').filter({ hasText: /hide/i }).first()).toBeVisible();
   });
 
-  test('[T1bb506a7] @banking HB-BANK-TX-006: Table shows key columns', async ({ page }) => {
+  test('@accounting HB-BANK-TX-006: Table shows key columns @T1bb506a7', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await waitForRowsOrEmpty(page);
@@ -100,7 +100,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     expect(hits).toBeGreaterThanOrEqual(4);
   });
 
-  test('[T0c7171d0] @banking HB-BANK-TX-007: Notifications panel opens and shows unread count', async ({ page }) => {
+  test('@accounting HB-BANK-TX-007: Notifications panel opens and shows unread count @T0c7171d0', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const notifications = page.getByRole('button', { name: /notifications/i }).first();
@@ -113,7 +113,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     }, 'Notifications button not found.');
   });
 
-  test('[Te81ae260] @banking HB-BANK-TX-008: Import Bank Statement section is visible', async ({ page }) => {
+  test('@accounting HB-BANK-TX-008: Import Bank Statement section is visible @Te81ae260', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await expect(page.getByText(/import bank statement/i)).toBeVisible();
@@ -121,7 +121,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     await expect(page.locator('button, [role="button"]').filter({ hasText: /import transactions|import/i }).first()).toBeVisible();
   });
 
-  test('[T5815e76e] @banking HB-BANK-TX-009: Import modal shows file format guidance', async ({ page }) => {
+  test('@accounting HB-BANK-TX-009: Import modal shows file format guidance @T5815e76e', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const importButton = page.getByRole('button', { name: /import transactions|import/i }).first();
@@ -132,7 +132,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     }, 'Import button not found.');
   });
 
-  test('[T2c5085ef] @banking HB-BANK-TX-010: Transactions list updates after search input', async ({ page }) => {
+  test('@accounting HB-BANK-TX-010: Transactions list updates after search input @T2c5085ef', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await waitForRowsOrEmpty(page);
@@ -145,14 +145,14 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     }, 'Search input not found.');
   });
 
-  test('[T1f31a3ab] @banking HB-BANK-TX-011: Bank & Cash header and subheading are visible', async ({ page }) => {
+  test('@accounting HB-BANK-TX-011: Bank & Cash header and subheading are visible @T1f31a3ab', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await expect(page.getByRole('heading', { name: /bank & cash/i })).toBeVisible();
     await expect(page.getByText(/manage transactions across your accounts/i).first()).toBeVisible();
   });
 
-  test('[Tfe5f45e3] @banking HB-BANK-TX-012: Reconciliation tab is accessible', async ({ page }) => {
+  test('@accounting HB-BANK-TX-012: Reconciliation tab is accessible @Tfe5f45e3', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const reconciliationTab = page.getByRole('tab', { name: /reconciliation/i });
@@ -160,7 +160,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     await expect(reconciliationTab).toHaveAttribute('aria-selected', /true/i);
   });
 
-  test('[Td44ffe8e] @banking HB-BANK-TX-013: Confirmed count label is displayed on tab', async ({ page }) => {
+  test('@accounting HB-BANK-TX-013: Confirmed count label is displayed on tab @Td44ffe8e', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     const confirmedTab = page.locator('[role="tab"], button, a').filter({ hasText: /confirmed/i }).first();
@@ -168,7 +168,7 @@ test.describe('@banking Banking / Bank & Cash / Transactions @S2f9a8e21', () => 
     await expect(confirmedTab).toContainText(/\(\d+\)/);
   });
 
-  test('[T26272342] @banking HB-BANK-TX-014: Table displays rows or empty state', async ({ page }) => {
+  test('@accounting HB-BANK-TX-014: Table displays rows or empty state @T26272342', async ({ page }) => {
     await seedLogin(page);
     await openTransactions(page);
     await waitForRowsOrEmpty(page);

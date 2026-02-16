@@ -670,7 +670,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await expect(passwordField).toHaveAttribute('type', 'password');
   });
 
-  test('@onboarding HB-LOGIN-051: Remember me checkbox toggles @T8c2f5b1e', async ({ page }) => {
+  test('@onboarding HB-LOGIN-051: Remember me checkbox toggles @T8c2f5b1f', async ({ page }) => {
     await openLoginForm(page);
     const remember = page.getByRole('checkbox', { name: /remember me for 7 days/i }).first();
     await optionalAction(remember, async () => {

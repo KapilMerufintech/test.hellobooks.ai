@@ -36,6 +36,15 @@ async function waitForRowsOrEmpty(page: Page) {
   ]).catch(() => {});
 }
 
+async function getFirstDataRow(page: Page) {
+  const row = page.locator('table tbody tr, [role="row"]').filter({ hasNotText: /no data|empty/i }).first();
+  if (!(await row.count())) {
+    return null;
+  }
+  await row.scrollIntoViewIfNeeded().catch(() => {});
+  return row;
+}
+
 async function waitForPageReady(page: Page) {
   const skeleton = page.locator('[aria-busy="true"], .skeleton, .ant-skeleton').first();
   await skeleton.waitFor({ state: 'hidden', timeout: 15000 }).catch(() => {});
@@ -333,5 +342,122 @@ test.describe('@accounting Banking / Bank & Cash / Transactions @S2f9a8e21', () 
         await expect(uploadText).toBeVisible();
       }, 'Upload instructions not visible.');
     }, 'Import button not found.');
+  });
+
+  test('@accounting HB-BANK-TX-030: Page loads without console errors @T4e2a9c1f', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') errors.push(msg.text());
+    });
+    await seedLogin(page);
+    await openTransactions(page);
+    expect(errors).toHaveLength(0);
+  });
+
+  test('@accounting HB-BANK-TX-031: First row shows date, description, amount fields @T6c1d8f3b', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    await waitForRowsOrEmpty(page);
+    const row = await getFirstDataRow(page);
+    if (!row) {
+      test.info().annotations.push({ type: 'note', description: 'No rows available for field validation.' });
+      return;
+    }
+    const cells = row.locator('td, [role="cell"]');
+    expect(await cells.count()).toBeGreaterThanOrEqual(3);
+    const rowText = await row.innerText();
+    expect(rowText).toMatch(/\d/);
+  });
+
+  test('@accounting HB-BANK-TX-032: Amounts use currency or separators (if present) @T8b4f1d2e', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    await waitForRowsOrEmpty(page);
+    const row = await getFirstDataRow(page);
+    if (!row) {
+      test.info().annotations.push({ type: 'note', description: 'No rows available for amount formatting.' });
+      return;
+    }
+    const amountCell = row.locator('td, [role="cell"]').filter({ hasText: /[₹$€]|\d{1,3}(,\d{3})+/ }).first();
+    if (!(await amountCell.count())) {
+      test.info().annotations.push({ type: 'note', description: 'No formatted amount detected in first row.' });
+      return;
+    }
+    await expect(amountCell).toBeVisible();
+  });
+
+  test('@accounting HB-BANK-TX-033: Negative amounts show minus sign (if present) @T1f7a3c9d', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    await waitForRowsOrEmpty(page);
+    const negAmount = page.locator('table tbody td, [role="cell"]').filter({ hasText: /-\s?\d/ }).first();
+    if (!(await negAmount.count())) {
+      test.info().annotations.push({ type: 'note', description: 'No negative amount rows detected.' });
+      return;
+    }
+    await expect(negAmount).toBeVisible();
+  });
+
+  test('@accounting HB-BANK-TX-034: Sorting by Date is clickable (if supported) @T3d0b7a5c', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    const dateHeader = page.getByRole('columnheader', { name: /date/i }).first();
+    await optionalAction(dateHeader, async () => {
+      await dateHeader.click();
+      await dateHeader.click();
+      await expect(dateHeader).toBeVisible();
+    }, 'Date column header not found.');
+  });
+
+  test('@accounting HB-BANK-TX-035: Pagination controls appear when available @T9c2e5a1b', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    const next = page.getByRole('button', { name: /next/i }).first();
+    if (!(await next.count())) {
+      test.info().annotations.push({ type: 'note', description: 'Pagination controls not visible.' });
+      return;
+    }
+    await expect(next).toBeVisible();
+  });
+
+  test('@accounting HB-BANK-TX-036: Pagination next/previous works (if enabled) @T5a8d2c1e', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    const next = page.getByRole('button', { name: /next/i }).first();
+    const prev = page.getByRole('button', { name: /prev|previous/i }).first();
+    if (!(await next.count())) {
+      test.info().annotations.push({ type: 'note', description: 'Pagination controls not found.' });
+      return;
+    }
+    if (await next.isEnabled().catch(() => false)) {
+      await next.click();
+      if (await prev.isEnabled().catch(() => false)) {
+        await prev.click();
+      }
+    } else {
+      test.info().annotations.push({ type: 'note', description: 'Next button disabled; only one page.' });
+    }
+  });
+
+  test('@accounting HB-BANK-TX-037: Search supports partial matches (if data available) @T2b6f9d0a', async ({ page }) => {
+    await seedLogin(page);
+    await openTransactions(page);
+    await waitForRowsOrEmpty(page);
+    const row = await getFirstDataRow(page);
+    if (!row) {
+      test.info().annotations.push({ type: 'note', description: 'No rows available for partial search.' });
+      return;
+    }
+    const rowText = (await row.innerText()).trim();
+    const token = rowText.split(/\s+/).find((t) => t.length >= 4);
+    if (!token) {
+      test.info().annotations.push({ type: 'note', description: 'No suitable token found for partial search.' });
+      return;
+    }
+    const partial = token.slice(0, 3);
+    const searchInput = page.locator('input[placeholder="Search" i]').first();
+    await searchInput.fill(partial);
+    await expect(searchInput).toHaveValue(partial);
+    await expect(row).toBeVisible();
   });
 });

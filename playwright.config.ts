@@ -28,8 +28,8 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: 'https://test.hellobooks.ai',
 
-    /* Take screenshot only when test fails */
-    screenshot: 'only-on-failure',
+    /* Take screenshot for all tests */
+    screenshot: 'on',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',

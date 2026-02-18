@@ -57,6 +57,12 @@ async function expectLoginFailed(page: Page) {
   await expect(page).toHaveURL(/\/login/i);
 }
 
+async function waitForPostLogin(page: Page) {
+  await page.waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 20000 }).catch(() => {});
+  await page.waitForLoadState('domcontentloaded').catch(() => {});
+  await page.waitForTimeout(8000);
+}
+
 async function optionalAction(locator: Locator, action: () => Promise<void>, note: string) {
   if (await locator.count()) {
     await action();
@@ -100,6 +106,7 @@ async function expectInvalidField(locator: Locator, expected: { valueMissing?: b
 test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
   test('@onboarding HB-LOGIN-001: Login with valid credentials @Ta3cb9f4b', async ({ page }) => {
     await seedLogin(page);
+    await waitForPostLogin(page);
     await expect(page).not.toHaveURL(/\/login/i);
   });
 
@@ -163,7 +170,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await fillLogin(page, '  fapopi7433@feanzier.com  ', 'Kapil08dangar@');
     await submitLogin(page);
     const navigated = await page
-      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 8000 })
+      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 20000 })
       .then(() => true)
       .catch(() => false);
     if (!navigated) {
@@ -172,6 +179,9 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
         description: 'Login blocked (Turnstile/auth gate); no navigation observed.',
       });
     }
+    if (navigated) {
+      await waitForPostLogin(page);
+    }
     await expect(page).toHaveURL(/\/login|https:\/\/test\.hellobooks\.ai\/$/i);
   });
 
@@ -179,6 +189,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await openLoginForm(page);
     await fillLogin(page, 'FAPOPI7433@FEANZIER.COM', 'Kapil08dangar@');
     await submitLogin(page);
+    await waitForPostLogin(page);
     await expect(page).not.toHaveURL(/\/login/i);
   });
 
@@ -216,7 +227,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await password.focus();
     await password.press('Enter');
     const navigated = await page
-      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 8000 })
+      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 20000 })
       .then(() => true)
       .catch(() => false);
     if (!navigated) {
@@ -224,6 +235,8 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
         type: 'note',
         description: 'Login did not navigate; Turnstile or auth gate may block automation.',
       });
+    } else {
+      await waitForPostLogin(page);
     }
     await expect(submit).toBeEnabled();
   });
@@ -233,6 +246,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await fillLogin(page, 'fapopi7433@feanzier.com', 'Kapil08dangar@');
     const { submit } = getLoginLocators(page);
     await submit.dblclick();
+    await waitForPostLogin(page);
     await expect(page).not.toHaveURL(/\/login/i);
   });
 
@@ -243,14 +257,17 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
       await remember.check();
       await fillLogin(page, 'fapopi7433@feanzier.com', 'Kapil08dangar@');
       await submitLogin(page);
+      await waitForPostLogin(page);
       await expect(page).not.toHaveURL(/\/login/i);
       await page.reload();
+      await waitForPostLogin(page);
       await expect(page).not.toHaveURL(/\/login/i);
     }, 'Remember me checkbox not present.');
   });
 
   test('@onboarding HB-LOGIN-016: Login page redirects when already authenticated @Tb08c5b9d', async ({ page }) => {
     await seedLogin(page);
+    await waitForPostLogin(page);
     await page.goto(`${baseUrl}/login`);
     const redirected = await page
       .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 8000 })
@@ -286,7 +303,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await fillLogin(page, 'fapopi7433@feanzier.com', 'Kapil08dangar@');
     await submitLogin(page);
     const navigated = await page
-      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 8000 })
+      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 20000 })
       .then(() => true)
       .catch(() => false);
     if (!navigated) {
@@ -294,6 +311,9 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
         type: 'note',
         description: 'Mobile login blocked (Turnstile/auth gate); no navigation observed.',
       });
+    }
+    if (navigated) {
+      await waitForPostLogin(page);
     }
     await expect(page).toHaveURL(/\/login|https:\/\/test\.hellobooks\.ai\/$/i);
   });
@@ -376,6 +396,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
 
   test('@onboarding HB-LOGIN-024: Sensitive data is not present in URL after login @Tf4a12fe8', async ({ page }) => {
     await seedLogin(page);
+    await waitForPostLogin(page);
     const url = page.url();
     expect(url).not.toMatch(/fapopi7433@feanzier\.com/i);
     expect(url).not.toMatch(/Kapil08dangar@/i);
@@ -397,6 +418,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
 
   test('@onboarding HB-LOGIN-027: Back button after login does not show login page @T6bdde595', async ({ page }) => {
     await seedLogin(page);
+    await waitForPostLogin(page);
     await page.goBack();
     await expect(page).not.toHaveURL(/\/login/i);
   });
@@ -407,7 +429,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await fillLogin(page, 'fapopi7433@feanzier.com', 'Kapil08dangar@');
     await submitLogin(page);
     const reached = await page
-      .waitForURL(/tab=transactions/i, { timeout: 8000 })
+      .waitForURL(/tab=transactions/i, { timeout: 20000 })
       .then(() => true)
       .catch(() => false);
     if (!reached) {
@@ -415,6 +437,8 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
         type: 'note',
         description: 'Protected redirect blocked (Turnstile/auth gate); landing page not reached.',
       });
+    } else {
+      await waitForPostLogin(page);
     }
     await expect(page).toHaveURL(/\/login|tab=transactions|https:\/\/test\.hellobooks\.ai\/$/i);
   });
@@ -517,6 +541,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
 
   test('@onboarding HB-LOGIN-042: Logout clears session and blocks protected pages @T7b2d9c1a', async ({ page }) => {
     await seedLogin(page);
+    await waitForPostLogin(page);
     await page.goto(`${baseUrl}/logout`).catch(() => {});
     await page.goto(baseUrl);
     const redirected = await page

@@ -1,0 +1,5 @@
+Startup Prompt (for a new chat)
+We've built and stabilized Playwright automation for HelloBooks.ai login and bank/cash transactions, added lots of tests, and configured Testomatio reporting. Key files: login.spec.ts (now ~55 tests), bank-cash-transactions.spec.ts, app_info.md, and playwright.config.ts. We enabled Testomatio reporter + dotenv and created .env with TESTOMATIO + TESTOMATIO_URL. Reporting still fails with 404 "Run not found", likely because the token is wrong scope; need a new Project Reporter token and retest. Turnstile causes login navigation failures, so some tests allow fallback URLs and add notes.
+
+Paste this at the beginning of a new chat to continue:
+We have Playwright tests for HelloBooks.ai login and banking. Testomatio reporter is configured in playwright.config.ts with dotenv and .env token, but reporting fails with 404 "Run not found", likely due to wrong project reporter token. Need to update token and verify reporting. Login tests handle Turnstile gating; tab order includes Turnstile iframe/privacy/help.

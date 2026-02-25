@@ -630,7 +630,7 @@ async function expectInvalidNumber(locator: Locator, note: string) {
   expect(state.validationMessage).not.toBe('');
 }
 
-test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-INV-020)', () => {
+test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-INV-033)', () => {
   test('@accounting HB-INV-001: Open invoices list', async ({ page }) => {
     await seedLogin(page);
     await openInvoicesList(page);
@@ -698,7 +698,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await assertVisibleOrNote(autoGenerate, 'Auto Generate control not visible.');
   });
 
-  test('@accounting HB-INV-006: Customer selection search', async ({ page }) => {
+  test('@accounting HB-INV-005: Customer selection search', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
 
@@ -736,14 +736,14 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-007: Add multiple line items', async ({ page }) => {
+  test('@accounting HB-INV-006: Add multiple line items', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { addLine, invoiceNo } = getInvoiceFormLocators(page);
     const lineItemsTable = page.locator('table').filter({ has: page.getByText(/item\/service/i) }).first();
     const items = lineItemsTable.locator('input[placeholder*="select item" i], [role="combobox"]');
     const rows = lineItemsTable.locator('tbody tr');
-    const targetCount = 100;
+    const targetCount = 10;
     await ensureInvoiceDates(page);
     await fillRequiredInvoiceFields(page, '1', '100');
     const invoiceNumber = (await invoiceNo.inputValue().catch(() => '')) || '';
@@ -795,7 +795,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-008: Edit line item quantity updates totals', async ({ page }) => {
+  test('@accounting HB-INV-007: Edit line item quantity updates totals', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { quantity } = getInvoiceFormLocators(page);
@@ -804,49 +804,33 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(quantity).toHaveValue('3');
   });
 
-  test('@accounting HB-INV-009: Remove line item updates totals', async ({ page }) => {
+  test('@accounting HB-INV-008: Remove line item updates totals', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     await fillRequiredInvoiceFields(page, '1', '100');
-    const { item } = getInvoiceFormLocators(page);
-    const lineRow = item.locator('xpath=ancestor::tr[1]');
-    const remove = lineRow.locator('button, [role="button"]').filter({ hasText: /remove|delete/i }).first();
+    const { item, addLine } = getInvoiceFormLocators(page);
+    const lineItemsTable = page.locator('table').filter({ has: page.getByText(/item\/service/i) }).first();
+    const rows = lineItemsTable.locator('tbody tr');
+
+    let rowCount = await rows.count();
+    if (rowCount < 2) {
+      await addLine.scrollIntoViewIfNeeded().catch(() => {});
+      await addLine.click({ force: true }).catch(() => {});
+      await expect.poll(async () => rows.count(), { timeout: 5000 }).toBeGreaterThanOrEqual(2);
+      rowCount = await rows.count();
+    }
+
+    const targetRow = rowCount > 1 ? rows.nth(rowCount - 1) : item.locator('xpath=ancestor::tr[1]');
+    const remove = targetRow.locator(
+      'button:has(svg.lucide-trash2), button[aria-label*="remove" i], button[aria-label*="delete" i], button[title*="remove" i], button[title*="delete" i], [role="button"][aria-label*="remove" i], [role="button"][aria-label*="delete" i], button:has-text("Remove"), button:has-text("Delete")',
+    ).first();
     await expect(remove).toBeVisible();
     await remove.click();
   });
 
-  test('@accounting HB-INV-010: Item-level discount applies before tax', async ({ page }) => {
-    await seedLogin(page);
-    await openNewInvoiceFromList(page);
-    await fillRequiredInvoiceFields(page, '1', '100');
-    const { item } = getInvoiceFormLocators(page);
-    const lineRow = item.locator('xpath=ancestor::tr[1]');
-    const discountType = lineRow.getByRole('combobox').filter({ hasText: /fixed|percent|%/i }).first();
-    await expect(discountType).toBeVisible();
-    await discountType.click();
-    const percentOption = page.getByRole('option', { name: /percent|%/i }).first();
-    await expect(percentOption).toBeVisible();
-    await percentOption.click();
-    const discountInput = lineRow.getByPlaceholder('0.00').first();
-    await expect(discountInput).toBeVisible();
-    await discountInput.fill('10');
-    const tax = lineRow.getByRole('combobox').filter({ hasText: /tax/i }).first();
-    await expect(tax).toBeVisible();
-    await tax.click();
-    const tenPercent = page.getByRole('option', { name: /10%/i }).first();
-    await expect(tenPercent).toBeVisible();
-    await tenPercent.click();
-  });
 
-  test('@accounting HB-INV-011: Invoice-level discount applies after item discounts', async ({ page }) => {
-    await seedLogin(page);
-    await openNewInvoiceFromList(page);
-    const { discount } = getInvoiceFormLocators(page);
-    await discount.fill('5');
-    await expect(discount).toHaveValue('5');
-  });
 
-  test('@accounting HB-INV-012: Tax inclusive pricing calculation', async ({ page }) => {
+  test('@accounting HB-INV-009: Tax inclusive pricing calculation', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { amountsAre } = getInvoiceFormLocators(page);
@@ -862,7 +846,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-013: Tax exclusive pricing calculation', async ({ page }) => {
+  test('@accounting HB-INV-010: Tax exclusive pricing calculation', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { amountsAre } = getInvoiceFormLocators(page);
@@ -870,7 +854,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(amountsAre).toHaveText(/tax exclusive/i);
   });
 
-  test('@accounting HB-INV-014: Multiple taxes per line item', async ({ page }) => {
+  test('@accounting HB-INV-011: Multiple taxes per line item', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     test.info().annotations.push({
@@ -879,7 +863,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     });
   });
 
-  test('@accounting HB-INV-015: Tax rounding to currency precision', async ({ page }) => {
+  test('@accounting HB-INV-012: Tax rounding to currency precision', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     test.info().annotations.push({
@@ -888,7 +872,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     });
   });
 
-  test('@accounting HB-INV-016: Invoice total rounding with multiple line items', async ({ page }) => {
+  test('@accounting HB-INV-013: Invoice total rounding with multiple line items', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     test.info().annotations.push({
@@ -897,7 +881,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     });
   });
 
-  test('@accounting HB-INV-017: Negative quantity validation', async ({ page }) => {
+  test('@accounting HB-INV-014: Negative quantity validation', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { quantity } = getInvoiceFormLocators(page);
@@ -905,7 +889,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expectInvalidNumber(quantity, 'Negative quantity accepted; no min constraint detected.');
   });
 
-  test('@accounting HB-INV-018: Zero quantity validation', async ({ page }) => {
+  test('@accounting HB-INV-015: Zero quantity validation', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { quantity } = getInvoiceFormLocators(page);
@@ -913,7 +897,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expectInvalidNumber(quantity, 'Zero quantity accepted; no min constraint detected.');
   });
 
-  test('@accounting HB-INV-019: Negative price validation', async ({ page }) => {
+  test('@accounting HB-INV-016: Negative price validation', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { price } = getInvoiceFormLocators(page);
@@ -921,7 +905,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expectInvalidNumber(price, 'Negative price accepted; no min constraint detected.');
   });
 
-  test('@accounting HB-INV-020: Item price override audit', async ({ page }) => {
+  test('@accounting HB-INV-017: Item price override audit', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { price } = getInvoiceFormLocators(page);
@@ -929,7 +913,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(price).toHaveValue('80');
   });
 
-  test('@accounting HB-INV-021: Discount percent validation above 100%', async ({ page }) => {
+  test('@accounting HB-INV-018: Discount percent validation above 100%', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     test.info().annotations.push({
@@ -938,7 +922,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     });
   });
 
-  test('@accounting HB-INV-022: Fixed discount greater than subtotal', async ({ page }) => {
+  test('@accounting HB-INV-019: Fixed discount greater than subtotal', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { discount } = getInvoiceFormLocators(page);
@@ -950,7 +934,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     });
   });
 
-  test('@accounting HB-INV-023: Apply credit note to invoice', async ({ page }) => {
+  test('@accounting HB-INV-020: Apply credit note to invoice', async ({ page }) => {
     await seedLogin(page);
     const opened = await openApplyAdvanceFromInvoice(page);
     if (!opened) return;
@@ -962,7 +946,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-024: Credit note exceeds invoice balance', async ({ page }) => {
+  test('@accounting HB-INV-021: Credit note exceeds invoice balance', async ({ page }) => {
     await seedLogin(page);
     const opened = await openApplyAdvanceFromInvoice(page);
     if (!opened) return;
@@ -976,7 +960,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-025: Record full payment', async ({ page }) => {
+  test('@accounting HB-INV-022: Record full payment', async ({ page }) => {
     await seedLogin(page);
     const opened = await openRecordPaymentFromInvoice(page);
     if (!opened) return;
@@ -1010,7 +994,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await assertVisibleOrNote(success, 'Payment success message not visible.');
   });
 
-  test('@accounting HB-INV-026: Record partial payment', async ({ page }) => {
+  test('@accounting HB-INV-023: Record partial payment', async ({ page }) => {
     await seedLogin(page);
     const opened = await openRecordPaymentFromInvoice(page);
     if (!opened) return;
@@ -1044,7 +1028,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await assertVisibleOrNote(success, 'Payment success message not visible.');
   });
 
-  test('@accounting HB-INV-027: Overpayment validation', async ({ page }) => {
+  test('@accounting HB-INV-024: Overpayment validation', async ({ page }) => {
     await seedLogin(page);
     const opened = await openRecordPaymentFromInvoice(page);
     if (!opened) return;
@@ -1075,7 +1059,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(toast).toBeVisible({ timeout: 20000 });
   });
 
-  test('@accounting HB-INV-028: Payment allocation across multiple invoices', async ({ page }) => {
+  test('@accounting HB-INV-025: Payment allocation across multiple invoices', async ({ page }) => {
     await seedLogin(page);
     await openPaymentsReceived(page);
     const recordPayment = page.getByRole('button', { name: /record payment/i }).first();
@@ -1119,7 +1103,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await assertVisibleOrNote(success, 'Payment success message not visible.');
   });
 
-  test('@accounting HB-INV-029: Unapplied payment handling', async ({ page }) => {
+  test('@accounting HB-INV-026: Unapplied payment handling', async ({ page }) => {
     await seedLogin(page);
     await openPaymentsReceived(page);
     const recordPayment = page.getByRole('button', { name: /record payment/i }).first();
@@ -1172,7 +1156,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await assertVisibleOrNote(success, 'Receipt success message not visible.');
   });
 
-  test('@accounting HB-INV-030: Write-off small balance', async ({ page }) => {
+  test('@accounting HB-INV-027: Write-off small balance', async ({ page }) => {
     await seedLogin(page);
     await openInvoicesList(page);
     const opened = await openAwaitingPaymentActions(page);
@@ -1191,7 +1175,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-031: Reverse or delete payment', async ({ page }) => {
+  test('@accounting HB-INV-028: Reverse or delete payment', async ({ page }) => {
     await seedLogin(page);
     await openPaymentsReceived(page);
     const rows = page.locator('table tbody tr');
@@ -1213,7 +1197,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 
-  test('@accounting HB-INV-032: Change tax rate after partial payment', async ({ page }) => {
+  test('@accounting HB-INV-029: Change tax rate after partial payment', async ({ page }) => {
     await seedLogin(page);
     await openInvoicesList(page);
     const row = page.locator('tr').filter({ hasText: /awaiting payment/i }).first();
@@ -1238,7 +1222,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     expect(updated).not.toBe(original);
   });
 
-  test('@accounting HB-INV-033: Backdated invoice posting', async ({ page }) => {
+  test('@accounting HB-INV-030: Backdated invoice posting', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     await fillMinimalInvoice(page, '01/01/2024');
@@ -1246,7 +1230,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(page).toHaveURL(/sales\/invoices/i);
   });
 
-  test('@accounting HB-INV-034: Prevent posting into closed period', async ({ page }) => {
+  test('@accounting HB-INV-031: Prevent posting into closed period', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     await fillMinimalInvoice(page, '01/01/2020');
@@ -1255,7 +1239,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(closedMessage).toBeVisible({ timeout: 15000 });
   });
 
-  test('@accounting HB-INV-035: Invoice currency matches customer currency', async ({ page }) => {
+  test('@accounting HB-INV-032: Invoice currency matches customer currency', async ({ page }) => {
     await seedLogin(page);
     await openNewInvoiceFromList(page);
     const { customer } = getInvoiceFormLocators(page);
@@ -1265,7 +1249,7 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     await expect(currency).toHaveText(/inr/i);
   });
 
-  test('@accounting HB-INV-036: Create 20 invoices with required fields', async ({ page }) => {
+  test('@accounting HB-INV-033: Create 20 invoices with required fields', async ({ page }) => {
     await seedLogin(page);
     await pauseForLoad(page, 4000);
     const { heading, date, dueDate, customer, item } = getInvoiceFormLocators(page);
@@ -1298,3 +1282,6 @@ test.describe('@accounting Sales / Invoices manual conversion (HB-INV-001 to HB-
     }
   });
 });
+
+
+

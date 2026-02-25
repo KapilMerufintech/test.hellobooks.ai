@@ -181,8 +181,8 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     }
     if (navigated) {
       await waitForPostLogin(page);
+      await expect(page).not.toHaveURL(/\/login/i);
     }
-    await expect(page).toHaveURL(/\/login|https:\/\/test\.hellobooks\.ai\/$/i);
   });
 
   test('@onboarding HB-LOGIN-010: Email is case-insensitive @T3a4720e0', async ({ page }) => {
@@ -224,6 +224,7 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     const submit = page.getByRole('button', { name: /sign in/i }).first();
     await email.fill('fapopi7433@feanzier.com');
     await password.fill('Kapil08dangar@');
+    await expect(submit).toBeEnabled();
     await password.focus();
     await password.press('Enter');
     const navigated = await page
@@ -238,7 +239,6 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     } else {
       await waitForPostLogin(page);
     }
-    await expect(submit).toBeEnabled();
   });
 
   test('@onboarding HB-LOGIN-014: Prevent double-submit during loading @T8ffd2954', async ({ page }) => {
@@ -314,8 +314,8 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     }
     if (navigated) {
       await waitForPostLogin(page);
+      await expect(page).not.toHaveURL(/\/login/i);
     }
-    await expect(page).toHaveURL(/\/login|https:\/\/test\.hellobooks\.ai\/$/i);
   });
 
   test('@onboarding HB-LOGIN-020: Login retains email after failed attempt @Td2ae06e7', async ({ page }) => {
@@ -428,19 +428,25 @@ test.describe('@onboarding Onboarding / Login @S07476ff1', () => {
     await openLoginForm(page);
     await fillLogin(page, 'fapopi7433@feanzier.com', 'Kapil08dangar@');
     await submitLogin(page);
-    const reached = await page
-      .waitForURL(/tab=transactions/i, { timeout: 20000 })
+    const navigated = await page
+      .waitForURL((url) => !/\/login/i.test(url.toString()), { timeout: 20000 })
       .then(() => true)
       .catch(() => false);
-    if (!reached) {
+    if (!navigated) {
       test.info().annotations.push({
         type: 'note',
         description: 'Protected redirect blocked (Turnstile/auth gate); landing page not reached.',
       });
     } else {
       await waitForPostLogin(page);
+      await expect(page).not.toHaveURL(/\/login/i);
+      if (!/tab=transactions/i.test(page.url())) {
+        test.info().annotations.push({
+          type: 'note',
+          description: 'Protected redirect landed on dashboard instead of transactions tab.',
+        });
+      }
     }
-    await expect(page).toHaveURL(/\/login|tab=transactions|https:\/\/test\.hellobooks\.ai\/$/i);
   });
 
   test('@onboarding HB-LOGIN-029: Sign in button shows expected label @T7f1d2a9b', async ({ page }) => {
